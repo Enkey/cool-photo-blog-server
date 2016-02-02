@@ -1,0 +1,26 @@
+{
+  "name": "tratado-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Enkey",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "cookie-parser": "^1.4.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "mongoose": "^4.3.7",
+    "morgan": "^1.6.1",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.8.1"
+  }
+}
