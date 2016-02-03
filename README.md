@@ -1,4 +1,4 @@
-# Cool-photo-blog-server
+# Cool photo blog Server
 
 ### Instalation
 
