@@ -63,8 +63,9 @@ router.post('/logout', function (req, res) {
 
 router.post('/signup', function (req, res, next) {
     var username = req.body.username;
+    var password = req.body.password;
 
-    if (!username) return next({});
+    if (!username || !password) return res.json({error: true, message: "Missing params!"});
 
     if (req.isAuthenticated()) {
         return res.json({error: true, message: "Access denied!"})
@@ -74,7 +75,7 @@ router.post('/signup', function (req, res, next) {
         console.log(err);
         console.log(user);
         if (!user) {
-            var userDB = new User({username: req.body.username, password: req.body.password});
+            var userDB = new User({username: username, password: password});
             userDB.save(function (err) {
                 console.log("user DB err", err);
                 if (err) {

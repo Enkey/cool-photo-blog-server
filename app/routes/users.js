@@ -4,7 +4,11 @@ var User = require('../models/user');
 
 router.get('/', function (req, res) {
     User.find({}, function (err, users) {
-        res.json(users);
+        var parsedUsers = [];
+        users.forEach(function(user){
+            parsedUsers.push(user.getPublic());
+        });
+        res.json({data: parsedUsers});
     });
 });
 router.get('/:username', function (req, res) {
