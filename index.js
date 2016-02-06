@@ -14,20 +14,22 @@ var authRoutes = require('./app/routes/auth');
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var crypto = require('crypto');
 
 /* ======== Configuration ======== */
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 3000;
 
 passport.use(new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password'
 }, function(username, password, done){
+    console.log(username, password);
     User.findOne({ username: username},function(err,user){
         if(err) {
             return done(err)
         }
         if(user) {
-            if(password === user.password) {
+            if(user.authenticate(password)) {
                 return done(null, user)
             } else {
                 return done(null, false, { message: 'Incorrect password.' });
@@ -75,10 +77,9 @@ app.use(function (req, res) {
     var err = new Error('Not Found');
     err.status = 404;
     res.json({
-        error: {
-            message: err.message,
-            status: err.status
-        }
+        error: true,
+        message: err.message,
+        status: err.status
     });
 });
 

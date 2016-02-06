@@ -7,4 +7,12 @@ router.get('/', function (req, res) {
         res.json(users);
     });
 });
+router.get('/:username', function (req, res) {
+    console.log(req.params.username);
+    User.findOne({username: req.params.username}, function (err, user) {
+        if(err) throw err;
+        res.json({user: user.getPublic()});
+    });
+
+});
 module.exports = router;

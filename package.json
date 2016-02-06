@@ -1,14 +1,14 @@
 {
-  "name": "tratado-server",
+  "name": "cool-photo-blog-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "start-dev": "nodemon index.js"
   },
   "author": "Enkey",
-  "license": "ISC",
+  "license": "AT-course :)",
   "dependencies": {
     "body-parser": "^1.14.2",
     "cookie-parser": "^1.4.1",

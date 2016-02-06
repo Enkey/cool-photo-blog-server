@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var User = require('../models/user');
+var crypto = require('crypto');
 
 router.post('/signin', function (req, res, next) {
     //passport.authenticate('local',
@@ -18,32 +19,44 @@ router.post('/signin', function (req, res, next) {
     //            : res.redirect('/fail');
     //    }
     //)(req, res, next);
-    console.log(req);
+
+    if (req.isAuthenticated()) {
+        return res.json({error: true, message: "Access denied!"})
+    }
+
     passport.authenticate('local',
-        function(err, user, info) {
+        function (err, user, info) {
             console.log('err:', err);
             console.log('info:', info);
             console.log('user:', user);
-            if(err) {
+            if (err) {
                 return next(err);
             } else {
-                if(user) {
-                    req.logIn(user, function(err) {
-                        if(err) {
+                if (user) {
+                    req.logIn(user, function (err) {
+                        if (err) {
                             return next(err);
                         } else {
-                            res.json({success: true, user: user});
+                            console.log(typeof user);
+                            res.json({success: true, user: user.getPublic()});
                         }
                     });
                 } else {
-                    res.json({error: true, message: 'Authentication error!'});
+                    var message = 'Authentication error!';
+                    if(info && info.message) {
+                        message = info.message;
+                    }
+                    res.json({error: true, message: message});
                 }
             }
         }
     )(req, res, next);
 });
 
-router.post('/logout', function(req, res) {
+router.post('/logout', function (req, res) {
+    if(!req.isAuthenticated()) {
+        return res.json({error: true, message: "Access denied!"})
+    }
     req.logout();
     res.json({success: true});
 });
@@ -51,26 +64,27 @@ router.post('/logout', function(req, res) {
 router.post('/signup', function (req, res, next) {
     var username = req.body.username;
 
-    if(!username) return next({});
+    if (!username) return next({});
 
-    if(req.isAuthenticated()) {
-        return res.json({blocked: true})
+    if (req.isAuthenticated()) {
+        return res.json({error: true, message: "Access denied!"})
     }
 
-    User.findOne({ username: username}, function (err, user) {
+    User.findOne({username: username}, function (err, user) {
         console.log(err);
         console.log(user);
-        if(!user) {
-            var user = new User({ username: req.body.username, password: req.body.password});
-            user.save(function(err) {
-                if(err) {
+        if (!user) {
+            var userDB = new User({username: req.body.username, password: req.body.password});
+            userDB.save(function (err) {
+                console.log("user DB err", err);
+                if (err) {
                     return next(err);
                 } else {
-                    req.login(user, function (err) {
-                        if(err) {
+                    req.login(userDB, function (err) {
+                        if (err) {
                             return next(err);
                         } else {
-                            res.json({success: true, user: user});
+                            res.json({success: true, user: userDB.getPublic()});
                         }
                     });
                 }
@@ -79,7 +93,6 @@ router.post('/signup', function (req, res, next) {
             res.json({error: true, message: "User already exists!"});
         }
     });
-
 
 
     //User.register(new User({ username : req.body.username }), req.body.password, function(err, user) {
@@ -98,7 +111,7 @@ router.post('/signup', function (req, res, next) {
     //});
 });
 
-router.get('/logout', function(req, res, next) {
+router.get('/logout', function (req, res, next) {
     req.logout();
     req.session.save(function (err) {
         if (err) {
