@@ -61,6 +61,10 @@ router.post('/logout', function (req, res) {
     res.json({success: true});
 });
 
+router.post('/is-authenticated', function (req, res) {
+    return res.json({isAuthenticated: req.isAuthenticated()});
+});
+
 router.post('/signup', function (req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
