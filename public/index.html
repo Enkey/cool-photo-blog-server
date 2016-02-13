@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="">
+<html lang="en" ng-app="app">
 <head>
     <meta charset="UTF-8">
     <title>Home page</title>
@@ -9,7 +9,38 @@
 
 Test! {{ng}}
 
+<div ng-controller="signupCtrl">
+    <h2>signup</h2>
+    username: <input type="text" ng-model="username">
+    password: <input type="text" ng-model="password">
+    <button ng-click="signup()">sign up</button>
+</div>
+
+
+
+<div ng-controller="signinCtrl">// ng-hide="isAuthenticated"
+    <h2>signin</h2>
+    <br>
+    username: <input type="text" ng-model="username">
+    password: <input type="text" ng-model="password">
+    <button ng-click="signin()">sign in</button>
+</div>
+
+<div ng-controller="logoutCtrl" >ng-show="isAuthenticated"
+    <h2>logout</h2>
+    <br>
+    <button ng-click="logout()">log out</button>
+</div>
+
+
+
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/angular/angular.min.js"></script>
+<script src="app.js"></script>
+<script src="common/angularPostFix.js"></script>
+<script src="user/userService.js"></script>
+<script src="user/signup/signupCtrl.js"></script>
+<script src="user/signin/signinCtrl.js"></script>
+<script src="user/logout/logoutCtrl.js"></script>
 </body>
 </html>
