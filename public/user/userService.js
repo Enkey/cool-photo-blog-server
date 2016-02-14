@@ -13,7 +13,7 @@ angular.module('app').service('userService', ['$http', function ($http) {
     this.checkIsAuthenticated = function () {
 
         return $http({
-            method: 'POST',
+            method: 'GET',
             url: 'auth/is-authenticated'
         });
 
@@ -62,7 +62,7 @@ angular.module('app').service('userService', ['$http', function ($http) {
     this.logout = function () {
 
         return $http({
-            method: 'POST',
+            method: 'GET',
             url: 'auth/logout'
         }).then(function (response) {
             console.log('Log out');
