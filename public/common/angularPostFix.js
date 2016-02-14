@@ -1,4 +1,4 @@
-angular.module('app', [], function($httpProvider)
+angular.module('app1', ['ngRoute'], function($httpProvider)
 {
     // Используем x-www-form-urlencoded Content-Type
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
