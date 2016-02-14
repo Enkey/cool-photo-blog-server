@@ -1,0 +1,34 @@
+@media(min-width:1200px){
+    body {
+        width: 1080px;
+    }
+
+    #back-photo{
+        width:880px;
+        float:right;
+
+        padding-top:80px;
+    }
+
+    #top{
+        height:80px;
+        background: #22465f;
+        position:fixed;
+        width:1080px;
+    }
+
+
+    /*registration text tag*/
+    #registration{
+        margin-left:800px;
+        margin-top:30px;
+    }
+
+    .img {
+        height: 260px;
+        width:288px;
+    }
+
+
+
+}
