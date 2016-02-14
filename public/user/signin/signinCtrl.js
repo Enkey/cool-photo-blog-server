@@ -1,9 +1,19 @@
-angular.module('app').controller('signinCtrl', ['$scope', '$rootScope', 'userService', function ($scope, $rootScope, userService) {
-    $rootScope.isAuthenticated = userService.isAuthenticated;
+angular.module('app').controller('signinCtrl', ['$scope', 'userService', 'mediator', function ($scope, userService, mediator) {
+
+
+    function init() {
+        $scope.isAuthenticated = userService.isAuthenticated;
+    }
+
+    init();
+
+    mediator.$on('my:event', function () {
+        init();
+    });
+
     $scope.signin = function () {
         userService.signin($scope.username, $scope.password).then(function () {
-
-            $rootScope.isAuthenticated = userService.isAuthenticated;
+            mediator.$emit('my:event');
         });
 
     };

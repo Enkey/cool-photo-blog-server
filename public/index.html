@@ -5,42 +5,40 @@
     <title>Home page</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 </head>
-<body ng-init="ng = 'angular'">
+<body>
 
-Test! {{ng}}
+Test!
 
-<div ng-controller="signupCtrl">
-    <h2>signup</h2>
-    username: <input type="text" ng-model="username">
-    password: <input type="text" ng-model="password">
-    <button ng-click="signup()">sign up</button>
+
+<div ng-controller="logoutCtrl">
+    <div ng-show="isAuthenticated">
+        <h2>logout</h2>
+        <br>
+        <button ng-click="logout()">log out</button>
+    </div>
 </div>
 
-
-
-<div ng-controller="signinCtrl">// ng-hide="isAuthenticated"
-    <h2>signin</h2>
-    <br>
-    username: <input type="text" ng-model="username">
-    password: <input type="text" ng-model="password">
-    <button ng-click="signin()">sign in</button>
+<div ng-controller="userInfoCtrl">
+    <a href="#userInfo" ng-show="isAuthenticated"> user info </a>
 </div>
 
-<div ng-controller="logoutCtrl" >ng-show="isAuthenticated"
-    <h2>logout</h2>
-    <br>
-    <button ng-click="logout()">log out</button>
-</div>
+<a href="#signin" ng-hide="isAuthenticated" ng-controller="signinCtrl"> signin </a>
+<br>
+<a href="#signup" ng-hide="isAuthenticated" ng-controller="signupCtrl"> signup </a>
 
+<div ng-view></div>
 
 
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
 <script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-route/angular-route.min.js"></script>
 <script src="app.js"></script>
 <script src="common/angularPostFix.js"></script>
 <script src="user/userService.js"></script>
 <script src="user/signup/signupCtrl.js"></script>
 <script src="user/signin/signinCtrl.js"></script>
 <script src="user/logout/logoutCtrl.js"></script>
+<script src="user/userInfo/userInfoCtrl.js"></script>
 </body>
 </html>

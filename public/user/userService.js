@@ -1,12 +1,26 @@
-angular.module('app').service('userService', ['$http', '$q', function ($http, $q) {
-    this.username = undefined;
-    this.email = undefined;
-    this.username = undefined;
-    this.isAuthenticated = false;
+angular.module('app').run(['userService', 'mediator', function (userService, mediator) {
+    userService.checkIsAuthenticated().then(function (response) {
+        userService.isAuthenticated = response.data.isAuthenticated;
+        mediator.$emit('my:event');
+    });
+}]);
+
+
+angular.module('app').service('userService', ['$http', function ($http) {
     var _this = this;
+    this.user = null;
+
+    this.checkIsAuthenticated = function () {
+
+        return $http({
+            method: 'POST',
+            url: 'auth/is-authenticated'
+        });
+
+    };
+
 
     this.signup = function (username, password) {
-
 
         return $http({
             method: 'POST',
@@ -16,7 +30,10 @@ angular.module('app').service('userService', ['$http', '$q', function ($http, $q
                 password: password
             }
         }).then(function (response) {
+            console.log('Sing up');
             console.log(response.data);
+            _this.isAuthenticated = true;
+            _this.user = response.data.user;
         });
 
 
@@ -32,10 +49,11 @@ angular.module('app').service('userService', ['$http', '$q', function ($http, $q
                 password: password
             }
         }).then(function (response) {
+            console.log('Sing in');
             console.log(response.data);
             if (response.data.success === true) {
-                console.log("sign in");
                 _this.isAuthenticated = true;
+                _this.user = response.data.user;
             }
         });
 
@@ -47,10 +65,11 @@ angular.module('app').service('userService', ['$http', '$q', function ($http, $q
             method: 'POST',
             url: 'auth/logout'
         }).then(function (response) {
+            console.log('Log out');
             console.log(response.data);
             if (response.data.success === true) {
-                console.log("logout");
                 _this.isAuthenticated = false;
+                _this.user = null;
             }
         });
 

@@ -1,9 +1,18 @@
-angular.module('app').controller('logoutCtrl', ['$scope', '$rootScope', 'userService', function ($scope, $rootScope, userService) {
-    $rootScope.isAuthenticated = userService.isAuthenticated;
+angular.module('app').controller('logoutCtrl', ['$scope', '$rootScope', 'userService', 'mediator', function ($scope, $rootScope, userService, mediator) {
+
+    function init() {
+        $scope.isAuthenticated = userService.isAuthenticated;
+    }
+
+    init();
+
+    mediator.$on('my:event', function () {
+        init();
+    });
+
     $scope.logout = function () {
         userService.logout().then(function () {
-
-            $rootScope.isAuthenticated = userService.isAuthenticated;
+            mediator.$emit('my:event');
         });
     };
 
