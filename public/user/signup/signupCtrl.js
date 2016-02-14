@@ -11,7 +11,8 @@ angular.module('app').controller('signupCtrl', ['$scope', 'userService', 'mediat
     });
 
     $scope.signup = function () {
-        userService.signup($scope.username, $scope.password);
-        init();
+        userService.signup($scope.username, $scope.password).then(function () {
+            mediator.$emit('my:event');
+        });
     };
 }]);

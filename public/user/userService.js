@@ -1,6 +1,7 @@
 angular.module('app').run(['userService', 'mediator', function (userService, mediator) {
     userService.checkIsAuthenticated().then(function (response) {
         userService.isAuthenticated = response.data.isAuthenticated;
+        userService.user = response.data.user;
         mediator.$emit('my:event');
     });
 }]);
@@ -32,8 +33,10 @@ angular.module('app').service('userService', ['$http', function ($http) {
         }).then(function (response) {
             console.log('Sing up');
             console.log(response.data);
-            _this.isAuthenticated = true;
-            _this.user = response.data.user;
+            if (response.data.success === true) {
+                _this.isAuthenticated = true;
+                _this.user = response.data.user;
+            }
         });
 
 

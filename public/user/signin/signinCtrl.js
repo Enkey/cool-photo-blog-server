@@ -1,6 +1,5 @@
 angular.module('app').controller('signinCtrl', ['$scope', 'userService', 'mediator', function ($scope, userService, mediator) {
 
-
     function init() {
         $scope.isAuthenticated = userService.isAuthenticated;
     }
