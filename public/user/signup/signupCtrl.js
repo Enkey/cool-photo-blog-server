@@ -1,18 +1,14 @@
-angular.module('app').controller('signupCtrl', ['$scope', 'userService', 'mediator', function ($scope, userService, mediator) {
+angular.module('app').controller('signupCtrl', ['$scope', 'userService', 'mediator', '$rootScope',
+    function ($scope, userService, mediator, $rootScope) {
 
-    function init() {
-        $scope.isAuthenticated = userService.isAuthenticated;
-    }
+        $scope.signup = function () {
+            userService.signup($scope.username, $scope.password, $scope.email).then(function (response) {
+                if (response.data.success === true) {
+                    $rootScope.isAuthenticated = true;
+                    document.location.href = "/#/";
+                }
 
-    init();
-
-    mediator.$on('my:event', function () {
-        init();
-    });
-
-    $scope.signup = function () {
-        userService.signup($scope.username, $scope.password).then(function () {
-            mediator.$emit('my:event');
-        });
-    };
-}]);
+                mediator.$emit('data:changed');
+            });
+        };
+    }]);

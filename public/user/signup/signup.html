@@ -1,7 +1,17 @@
 <div ng-hide="isAuthenticated">
-    <h2>signup</h2>
-    username: <input type="text" ng-model="username">
-    password: <input type="text" ng-model="password">
-    <button ng-click="signup()">sign up</button>
-    <a href="/">Home</a>
+    <div align="center">
+        <h2>Registration</h2>
+    </div>
+    <div align="center">
+        <u><i>Username</i></u> </br></br>
+        <input type="text" placeholder="Your Username" ng-model="username"> </br></br>
+        <u><i>Email</i></u> </br></br>
+        <input type="email" placeholder="Your Email" ng-model="email"> </br></br>
+        <u><i>Password</i></u> </br></br>
+        <input type="password" placeholder="Your Password" ng-model="password">
+    </div>
+    <div align="center">
+        </br></br>
+        <button class="button1" ng-click="signup()">Register</button>
+    </div>
 </div>

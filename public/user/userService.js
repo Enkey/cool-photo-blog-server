@@ -1,8 +1,13 @@
-angular.module('app').run(['userService', 'mediator', function (userService, mediator) {
+angular.module('app').run(['userService', '$rootScope', 'mediator', function (userService, $rootScope, mediator) {
+    console.log('run');
     userService.checkIsAuthenticated().then(function (response) {
         userService.isAuthenticated = response.data.isAuthenticated;
+        $rootScope.isAuthenticated = userService.isAuthenticated;
         userService.user = response.data.user;
-        mediator.$emit('my:event');
+        if (userService.user) {
+            console.log('Run user: ' + userService.user.username);
+        }
+        mediator.$emit('data:loaded');
     });
 }]);
 
@@ -21,7 +26,7 @@ angular.module('app').service('userService', ['$http', function ($http) {
     };
 
 
-    this.signup = function (username, password) {
+    this.signup = function (username, password, email) {
 
         return $http({
             method: 'POST',
@@ -37,6 +42,7 @@ angular.module('app').service('userService', ['$http', function ($http) {
                 _this.isAuthenticated = true;
                 _this.user = response.data.user;
             }
+            return response;
         });
 
 
@@ -58,6 +64,7 @@ angular.module('app').service('userService', ['$http', function ($http) {
                 _this.isAuthenticated = true;
                 _this.user = response.data.user;
             }
+            return response;
         });
 
     };
@@ -74,6 +81,7 @@ angular.module('app').service('userService', ['$http', function ($http) {
                 _this.isAuthenticated = false;
                 _this.user = null;
             }
+            return response;
         });
 
     };

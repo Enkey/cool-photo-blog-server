@@ -1,0 +1,32 @@
+@media (min-width: 1200px) {
+    body {
+        width: 1080px;
+    }
+
+    #back-photo {
+        width: 879px;
+        float: right;
+        padding-right: 1px;
+
+        padding-top: 80px;
+    }
+
+    #top {
+        height: 80px;
+        background: #060E1F; /* #22465f;8*/
+        position: fixed;
+        width: 1080px;
+    }
+
+    /*registration text tag*/
+    #registration {
+        margin-left: 800px;
+        margin-top: 30px;
+    }
+
+    /*    .img {
+            height: 260px;
+            width:288px;
+        }*/
+
+}

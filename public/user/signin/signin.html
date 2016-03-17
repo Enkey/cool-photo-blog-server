@@ -1,9 +1,15 @@
 <div ng-hide="isAuthenticated">
-    <h2>signin</h2>
-    <br>
-    username: <input type="text" ng-model="username">
-    password: <input type="text" ng-model="password">
-    <button ng-click="signin()">sign in</button>
-    <a href="/">Home</a>
-</div>
+    <div align="center">
+        <h2>Login</h2>
+    </div>
+    <div align="center">
+        <u><i>Username</i></u> </br></br>
+        <input type="text" placeholder="Your Username" ng-model="username"> </br></br>
+        <u><i>Password</i></u> </br></br>
+        <input type="password" placeholder="Your Password" ng-model="password">
+    </div>
+    <div align="center">
+        </br></br>
+        <button class="button1" ng-click="signin()">Login</button>
+    </div>
 </div>

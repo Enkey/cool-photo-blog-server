@@ -2,43 +2,86 @@
 <html lang="en" ng-app="app">
 <head>
     <meta charset="UTF-8">
-    <title>Home page</title>
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <title>PhotoBlog</title>
+    <link rel="stylesheet" href="css/style1.css">
+    <link rel="stylesheet" href="css/style-responsive2.css">
+    <link rel="stylesheet" href="css/style_forms.css">
+
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.0.0/masonry.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.0/imagesloaded.pkgd.js"></script>
+    <script src="common/common.js"></script>
+
 </head>
 <body>
 
-Test!
+<div class="all">
+    <div id="header">
+        <div id="top" class="text-color">
+            <div id="blog"><a href="/">PhotoBlog.org</a></div>
+            <div class="top-user-block" ng-hide="isAuthenticated">
+                <a href="#/signin">Login</a> | <a href="#/signup">Registration</a>
+            </div>
+            <div class="top-user-block" ng-show="isAuthenticated" ng-controller="logoutCtrl">
+                <a href="#/" ng-click="logout()">logout</a>
+            </div>
+        </div><!--Top block-->
+        <div>
+            <div id="left">
+                <div class="user-block" ng-hide="isAuthenticated">
+                    <img src="images/alien.png"  width="90" height="90" style="margin-left:55px;">
+                    <p id="guest" class="text-color"> Hello, Guest</p>
+                </div>
+                <div class="user-block" ng-show="isAuthenticated" ng-controller="infoCtrl">
+                    <img src="images/maxim.png" width="90" height="90" style="margin-left:55px;">
+                    <p id="guest" class="text-color"> Hello, {{username}}</p>
+                    <img id="set" src="images/sett.png" width="75" height="32">
+                </div>
 
+                <form>
+                    <input id="search" type="text" placeholder="Search...">
+                </form>
+                <div id="choice">
+                    <ul class="text-color">
+                        <li>Animals</li>
+                        <li>Space</li>
+                        <li>Flowers</li>
+                        <li>Nature</li>
+                        <li>Girls</li>
+                        <li>Cars</li>
+                        <li>Buildings</li>
+                        <li>Mountains</li>
+                        <li>Design</li>
 
-<div ng-controller="logoutCtrl">
-    <div ng-show="isAuthenticated">
-        <h2>logout</h2>
-        <br>
-        <button ng-click="logout()">log out</button>
-    </div>
+                    </ul>
+                    <hr>
+                    <div id="settings">
+                        <img src="images/hack.png">
+                        <img src="images/mob.png">
+                        <img src="images/chat.png">
+                    </div>
+
+                </div> <!--choice-->
+            </div><!--Left block-->
+            <div id="back-photo">
+                <div ng-view></div>
+            </div>
+        </div>
+
+    </div><!--Header block -->
+
 </div>
 
-<div ng-controller="userInfoCtrl">
-    <a href="#userInfo" ng-show="isAuthenticated"> user info </a>
-</div>
-
-<a href="#signin" ng-hide="isAuthenticated" ng-controller="signinCtrl"> signin </a>
-<br>
-<a href="#signup" ng-hide="isAuthenticated" ng-controller="signupCtrl"> signup </a>
-
-<div ng-view></div>
-
-
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
 
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-route/angular-route.min.js"></script>
 <script src="app.js"></script>
+<script src="main/mainCtrl.js"></script>
 <script src="common/angularPostFix.js"></script>
 <script src="user/userService.js"></script>
+<script src="user/info/infoCtrl.js"></script>
 <script src="user/signup/signupCtrl.js"></script>
 <script src="user/signin/signinCtrl.js"></script>
 <script src="user/logout/logoutCtrl.js"></script>
-<script src="user/userInfo/userInfoCtrl.js"></script>
 </body>
 </html>

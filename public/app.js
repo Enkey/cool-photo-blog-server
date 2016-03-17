@@ -5,6 +5,10 @@ app.factory('mediator', ['$rootScope', function ($rootScope) {
 app.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider
+            .when('/', {
+                templateUrl: 'main/main.html',
+                controller: 'mainCtrl'
+            })
             .when('/signin', {
                 templateUrl: 'user/signin/signin.html',
                 controller: 'signinCtrl'
@@ -14,12 +18,11 @@ app.config(['$routeProvider',
                 controller: 'signupCtrl'
             })
             .when('/userInfo', {
-                templateUrl: 'user/userInfo/userInfo.html',
-                controller: 'userInfoCtrl'
+                templateUrl: 'user/info/info.html',
+                controller: 'infoCtrl'
             })
-            .when('/userInfo', {
-                templateUrl: 'user/userInfo/userInfo.html',
-                controller: 'userInfoCtrl'
+            .otherwise({
+                redirectTo: '/'
             });
     }]);
 
