@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute']);
+var app = angular.module('app', ['ngRoute', 'btford.socket-io']);
 app.factory('mediator', ['$rootScope', function ($rootScope) {
     return $rootScope.$new(true); // isolate
 }]);

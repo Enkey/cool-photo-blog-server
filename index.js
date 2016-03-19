@@ -1,5 +1,7 @@
 var express = require('express');
 var app = express();
+var server   = require('http').Server(app);
+var io       = require('socket.io')(server);
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var morgan = require('morgan');
@@ -72,6 +74,18 @@ app.use('/auth', authRoutes);
 app.use('/users', usersRoutes);
 app.use('/file', fileRoutes);
 
+/* CORS routes */
+app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key');
+    if (req.method == 'OPTIONS') {
+        res.status(200).end();
+    } else {
+        next();
+    }
+});
+
 /* __ Not found route __ */
 app.use(function (req, res) {
     var err = new Error('Not Found');
@@ -82,6 +96,58 @@ app.use(function (req, res) {
         status: err.status
     });
 });
+
+/*||||||||||||||||SOCKET|||||||||||||||||||||||*/
+//Listen for connection
+io.on('connection', function(socket) {
+    //Globals
+    var defaultRoom = 'general';
+    var rooms = ["General", "angular", "socket.io", "express", "node", "mongo", "PHP", "laravel"];
+
+    //Emit the rooms array
+    socket.emit('setup', {
+        rooms: rooms
+    });
+
+    //Listens for new user
+    socket.on('new user', function(data) {
+        data.room = defaultRoom;
+        //New user joins the default room
+        socket.join(defaultRoom);
+        //Tell all those in the room that a new user joined
+        io.in(defaultRoom).emit('user joined', data);
+    });
+
+    //Listens for switch room
+    socket.on('switch room', function(data) {
+        //Handles joining and leaving rooms
+        //console.log(data);
+        socket.leave(data.oldRoom);
+        socket.join(data.newRoom);
+        io.in(data.oldRoom).emit('user left', data);
+        io.in(data.newRoom).emit('user joined', data);
+
+    });
+
+    //Listens for a new chat message
+    socket.on('new message', function(data) {
+        //Create message
+        var newMsg = new Chat({
+            username: data.username,
+            content: data.message,
+            room: data.room.toLowerCase(),
+            created: new Date()
+        });
+        //Save it to database
+        newMsg.save(function(err, msg){
+            //Send message to those connected in the room
+            io.in(msg.room).emit('message created', msg);
+        });
+    });
+});
+/*||||||||||||||||||||END SOCKETS||||||||||||||||||*/
+
+
 
 /*======== Start ======== */
 app.listen(port);
