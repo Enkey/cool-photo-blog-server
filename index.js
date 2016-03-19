@@ -11,6 +11,7 @@ var User = require('./app/models/user');
 var pageRoutes = require('./app/routes/pages');
 var usersRoutes = require('./app/routes/users');
 var authRoutes = require('./app/routes/auth');
+var fileRoutes = require('./app/routes/file');
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -48,7 +49,6 @@ passport.deserializeUser(function(id, done) {
         err ? done(err) : done(null,user);
     });
 });
-
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static('public'));
@@ -70,6 +70,7 @@ mongoose.connect(config.database);
 app.use('/', pageRoutes);
 app.use('/auth', authRoutes);
 app.use('/users', usersRoutes);
+app.use('/file', fileRoutes);
 
 /* __ Not found route __ */
 app.use(function (req, res) {
