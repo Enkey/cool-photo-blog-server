@@ -20,10 +20,10 @@ var crypto = require('crypto');
 var port = process.env.PORT || 3000;
 
 passport.use(new LocalStrategy({
-    usernameField: 'username',
+    usernameField: 'email',
     passwordField: 'password'
-}, function(username, password, done){
-    User.findOne({ username: username},function(err,user){
+}, function(email, password, done){
+    User.findOne({ email: email},function(err,user){
         if(err) {
             return done(err)
         }

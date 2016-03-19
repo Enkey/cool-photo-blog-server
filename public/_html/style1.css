@@ -1,0 +1,148 @@
+
+body{
+    width:960px;
+    margin: 0 auto;
+    background: darkgray;
+}
+
+#header{
+    width:100%;
+}
+/* Top - block*/
+#top{
+    height:80px;
+    background: #22465f;
+    position:fixed;
+    width:960px;
+    z-index: 3;
+}
+/*Left -block*/
+#left{
+    /*   padding-top:0px; /* move content*/
+    margin-top:80px; /* move block*/
+    height:100%;
+    width:200px;
+    float:left;
+    background:#22465f;
+    position:fixed;
+}
+/*background for photo*/
+#back-photo{
+    height:3000px;
+    width:760px;
+    float:right;
+    background: whitesmoke;
+    padding-top:80px;
+
+}
+
+/*input tag for search*/
+#search{
+    margin-top:15px;
+    width:194px;
+    height:25px;
+    background:#cbdce6;
+    margin-left:3px;
+    border:darkcyan;
+    font-family:"Myraid Pro Regular",sans-serif;
+    font-size:20px;
+    text-align: center;
+
+}
+/*text color,size and type*/
+.text-color{
+    font-family:"Myraid Pro Regular",sans-serif;
+    font-size:20px;
+    color:white;
+}
+/*registration text tag*/
+#registration{
+    margin-left:580px;
+    margin-top:30px;
+}
+/*Text for photoBlog.com*/
+#blog{
+    margin-left: 40px;
+}
+
+/*display inline*/
+#top p{
+    text-align: center;
+    display:inline-block;
+}
+
+/*text for quest*/
+#guest{
+    text-align:center;
+    margin-top:1px;
+
+}
+
+#set{
+    margin-left: 60px;
+    margin-top:-15px;
+
+}
+
+
+#choice li{
+    margin:12px;
+    padding-right:45px;
+    list-style-type: none;
+    text-align:center;
+
+}
+
+/*Mouse on text effect*/
+#choice li:hover{
+    color:lightslategrey;
+
+}
+
+hr {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-width: 3px;
+}
+
+#settings img{
+    margin-left:auto;
+    margin-right:auto;
+    height:63px;
+    width:63px;
+}
+
+
+#registration:hover,#registration1:hover {
+    color:#e04f5f;
+}
+
+#gallery {
+    z-index: 2;
+}
+/*Try to use masonry*/
+
+.size4{
+    width: 293px;
+    box-sizing: border-box;
+    padding: 1px;
+
+}
+
+.item-masonry img{
+    padding-left:1px;
+    width:100%;
+    display:block;
+}
+
+
+
+
+
+
+
+
+
+
+

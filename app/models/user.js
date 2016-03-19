@@ -42,7 +42,6 @@ UserSchema
  * Validations
  */
 
-// the below 5 validations only apply if you are signing up traditionally
 //
 //UserSchema.path('name').validate(function (name) {
 //    if (this.skipValidation()) return true;
@@ -54,21 +53,19 @@ UserSchema
 //    return email.length;
 //}, 'Email cannot be blank');
 //
-//UserSchema.path('email').validate(function (email, fn) {
-//    const User = mongoose.model('User');
-//    if (this.skipValidation()) fn(true);
-//
-//    // Check only when it is a new user or when email field is modified
-//    if (this.isNew || this.isModified('email')) {
-//        User.find({email: email}).exec(function (err, users) {
-//            fn(!err && users.length === 0);
-//        });
-//    } else fn(true);
-//}, 'Email already exists');
+UserSchema.path('email').validate(function (email, fn) {
+    const User = mongoose.model('User');
 
-UserSchema.path('username').validate(function (username) {
-    return username.length;
-}, 'Username cannot be blank');
+    if (this.isNew) {
+        User.find({email: email}).exec(function (err, users) {
+            fn(!err && users.length === 0);
+        });
+    } else fn(true);
+}, 'Email already exists');
+
+//UserSchema.path('email').validate(function (email) {
+//    return email.length;
+//}, 'Email cannot be blank');
 
 UserSchema.path('hashed_password').validate(function (hashed_password) {
     return hashed_password.length && this._password.length;
@@ -80,7 +77,10 @@ UserSchema.path('hashed_password').validate(function (hashed_password) {
  */
 
 UserSchema.pre('save', function (next) {
+
     if (!this.isNew) return next();
+
+    this.username = this.email.split('@')[0];
 
     if (!validatePresenceOf(this.password)) {
         next(new Error('Invalid password'));
