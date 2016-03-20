@@ -12,37 +12,48 @@ var storage = multer.diskStorage({
         });
     }
 });
-
-var upload = multer({ storage: storage }).single('image');
-var File = require('../../models/file');
-
 var validMIMETypes = ['image/gif', 'image/jpeg', 'image/png', 'image/pjpeg'];
 
+var upload = multer({
+    storage: storage,
+    fileFilter: function (req, file, cb) {
+        console.log(file);
+        if(validMIMETypes.indexOf(file.mimetype) == -1) {
+            return cb(null, false);
+        }
+        cb(null, true)
+    },
+    limits: {
+        fileSize: 500000,
+        files:1
+    }
+}).single('image');
+
+var File = require('../../models/file');
 
 module.exports = function (req, res, next) {
+
     upload(req, res, function (err) {
         console.log(req.file);
         if (err) {
             // An error occurred when uploading
             console.log(err);
-            next();
+            return next();
         }
 
-        if(validMIMETypes.indexOf(req.file.mimetype) == -1) {
-            return res.json({error: true, message: 'Invalid file type!'})
+        if(req.file) {
+            var file = new File({
+                originalName: req.file.originalname,
+                filename: req.file.filename,
+                size: req.file.size
+            });
+
+            file.save(function (err) {
+                if (err) return next(err);
+                res.json({success: true, image: file});
+            });
+        } else {
+            res.json({error: true, message: 'Invalid file type!'})
         }
-
-        var file = new File({
-            originalName: req.file.originalname,
-            filename: req.file.filename,
-            size: req.file.size
-        });
-
-        file.save(function (err) {
-            if(err) return next(err);
-            res.json({success: true, image: file});
-        });
-
-
     });
 };
