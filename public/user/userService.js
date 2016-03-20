@@ -12,7 +12,7 @@ angular.module('app').run(['userService', '$rootScope', 'mediator', function (us
 }]);
 
 
-angular.module('app').service('userService', ['$http', function ($http) {
+angular.module('app').service('userService', ['$http', '$q', function ($http, $q) {
     var _this = this;
     this.user = null;
 
@@ -26,13 +26,13 @@ angular.module('app').service('userService', ['$http', function ($http) {
     };
 
 
-    this.signup = function (username, password, email) {
+    this.signup = function (email, password) {
 
         return $http({
             method: 'POST',
             url: 'auth/signup',
             data: {
-                username: username,
+                email: email,
                 password: password
             }
         }).then(function (response) {
@@ -41,20 +41,24 @@ angular.module('app').service('userService', ['$http', function ($http) {
             if (response.data.success === true) {
                 _this.isAuthenticated = true;
                 _this.user = response.data.user;
+                return response.data;
             }
-            return response;
+            else {
+                return $q.reject(response.data);
+            }
+
         });
 
 
     };
 
-    this.signin = function (username, password) {
+    this.signin = function (email, password) {
 
         return $http({
             method: 'POST',
             url: 'auth/signin',
             data: {
-                username: username,
+                email: email,
                 password: password
             }
         }).then(function (response) {
@@ -63,8 +67,12 @@ angular.module('app').service('userService', ['$http', function ($http) {
             if (response.data.success === true) {
                 _this.isAuthenticated = true;
                 _this.user = response.data.user;
+                return response.data;
             }
-            return response;
+            else {
+                return $q.reject(response.data);
+            }
+
         });
 
     };

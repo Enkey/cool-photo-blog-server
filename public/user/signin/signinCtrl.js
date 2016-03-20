@@ -2,13 +2,14 @@ angular.module('app').controller('signinCtrl', ['$scope', 'userService', '$rootS
     function ($scope, userService, $rootScope, mediator) {
 
         $scope.signin = function () {
-            userService.signin($scope.username, $scope.password).then(function (response) {
-                if (response.data.success === true) {
-                    $rootScope.isAuthenticated = true;
+            userService.signin($scope.email, $scope.password)
+                .then(function (data) {
+                    $rootScope.isAuthenticated = userService.isAuthenticated;
                     document.location.href = "/#/";
-                }
-
-                mediator.$emit('data:changed');
-            });
+                    mediator.$emit('data:changed');
+                })
+                .catch(function (err) {
+                    $scope.error = err.message;
+                });
         };
     }]);
