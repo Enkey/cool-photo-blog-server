@@ -1,4 +1,4 @@
-angular.module('app').controller('infoCtrl', ['$scope', 'userService', '$rootScope', 'mediator',
+angular.module('app').controller('userCtrl', ['$scope', 'userService', '$rootScope', 'mediator',
     function ($scope, userService, $rootScope, mediator) {
 
         mediator.$on('data:changed', function () {
