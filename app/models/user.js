@@ -54,11 +54,11 @@ UserSchema
 //    return email.length;
 //}, 'Email cannot be blank');
 //
-UserSchema.path('username').validate(function (email, fn) {
+UserSchema.path('username').validate(function (username, fn) {
     const User = mongoose.model('User');
 
     if (this.isNew) {
-        User.find({email: email}).exec(function (err, users) {
+        User.find({username: username}).exec(function (err, users) {
             fn(!err && users.length === 0);
         });
     } else fn(true);
