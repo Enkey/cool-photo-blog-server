@@ -6,11 +6,7 @@ angular.module('app').controller('infoCtrl', ['$scope', 'userService', '$rootSco
         });
 
         function init() {
-
             $scope.user = userService.user;
-            if ($scope.user) {
-                $scope.username = $scope.user.username;
-            }
         }
 
         init();
