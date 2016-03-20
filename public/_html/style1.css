@@ -84,11 +84,11 @@ body{
     margin-top:-15px;
 
 }
-/*#set1{
-    padding-left:85px;
-    margin-top:-15px;
+#set1,#set {
+    cursor:pointer;
 
-}*/
+
+}
 
 
 #choice li{
