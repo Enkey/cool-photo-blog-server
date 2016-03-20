@@ -7,7 +7,7 @@ angular.module('app').run(['userService', '$rootScope', 'mediator', function (us
         if (userService.user) {
             console.log('Run user: ' + userService.user.username);
         }
-        mediator.$emit('data:loaded');
+        mediator.$emit('data:changed');
     });
 }]);
 

@@ -1,3 +1,7 @@
+html, body, .all, #header, #main{
+    height: 100%;
+}
+
 body {
     width: 960px;
     margin: 0 auto;
@@ -30,13 +34,9 @@ body {
 
 /*background for photo*/
 #back-photo {
-    height: 100%;
-    width: 760px;
-    float: right;
     background: whitesmoke;
-    padding-top: 80px;
-    padding-right: 1px;
-
+    margin-right: -9px;
+    margin-left: -10px;
 }
 
 /*input tag for search*/
@@ -69,16 +69,16 @@ body {
 /*Text for photoBlog.com*/
 #blog {
     margin-left: 40px;
-    float:left;
+    float: left;
 }
+
 #blog a {
     text-decoration: none;
     color: #fff;
 }
 
-
 .top-user-block {
-    float:right;
+    float: right;
     padding-right: 25px;
 }
 
@@ -90,7 +90,6 @@ body {
 #top div {
     padding-top: 25px;
 }
-
 
 /*display inline*/
 #top p {
@@ -107,16 +106,6 @@ p.top-user-block {
     text-align: center;
     margin-top: 1px;
 
-}
-
-#set {
-    margin-left: 70px;
-    margin-top: -15px;
-
-}
-
-#set1,#set{
-	cursor:pointer;
 }
 
 #choice li {
@@ -171,14 +160,19 @@ hr {
     display: block;
 }
 
+.user-block-control-panel {
+    text-align: center;
+}
 
+.user-block-control-panel a img {
+    width: 30px;
+    height: 30px;
+}
 
+.content {
+    background-color: #fff;
+    height: 100%;
 
-
-
-
-
-
-
-
-
+    /*200 + 10*/
+    padding: 80px 10px 10px 210px;
+}

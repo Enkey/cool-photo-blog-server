@@ -1,2 +1,19 @@
-<input type="file" file-model="file">
-<button ng-click="addPost()">Add post</button>
+    <h2>Add new post</h2>
+    <form>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" class="form-control" placeholder="Title" ng-model="title">
+        </div>
+
+        <div class="form-group">
+            <label for="user">Author</label>
+            <input type="text" id="user" class="form-control" ng-model="username" disabled>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input type="file" id="image" file-model="file">
+        </div>
+
+        <button class="btn btn-success" ng-click="addPost()">Add</button>
+    </form>
