@@ -11,28 +11,29 @@ body{
 /* Top - block*/
 #top{
     height:80px;
-    background: #22465f;
+    background:#060E1F;/* #22465f;8*/
     position:fixed;
     width:960px;
     z-index: 3;
 }
 /*Left -block*/
 #left{
-    /*   padding-top:0px; /* move content*/
+      padding-top:0px; /* move content*/
     margin-top:80px; /* move block*/
     height:100%;
     width:200px;
     float:left;
-    background:#22465f;
+    background:#060E1F;
     position:fixed;
 }
 /*background for photo*/
 #back-photo{
-    height:3000px;
+    height:100%;
     width:760px;
     float:right;
     background: whitesmoke;
     padding-top:80px;
+    padding-right:1px;
 
 }
 
@@ -79,10 +80,15 @@ body{
 }
 
 #set{
-    margin-left: 60px;
+    padding-left:70px;
     margin-top:-15px;
 
 }
+/*#set1{
+    padding-left:85px;
+    margin-top:-15px;
+
+}*/
 
 
 #choice li{
@@ -109,8 +115,9 @@ hr {
 #settings img{
     margin-left:auto;
     margin-right:auto;
-    height:63px;
-    width:63px;
+    height:53px;
+    width:53px;
+    padding-left: 8px;
 }
 
 
@@ -124,17 +131,21 @@ hr {
 /*Try to use masonry*/
 
 .size4{
-    width: 293px;
+    width:50%;
     box-sizing: border-box;
     padding: 1px;
+
 
 }
 
 .item-masonry img{
-    padding-left:1px;
+    padding-left: 1px;
     width:100%;
     display:block;
 }
+
+
+
 
 
 
