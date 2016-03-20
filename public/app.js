@@ -21,6 +21,10 @@ app.config(['$routeProvider',
                 templateUrl: 'user/info/info.html',
                 controller: 'infoCtrl'
             })
+            .when('/post', {
+                templateUrl: 'post/post.html',
+                controller: 'postCtrl'
+            })
             .otherwise({
                 redirectTo: '/'
             });
