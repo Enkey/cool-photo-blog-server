@@ -2,7 +2,7 @@ angular.module('app').controller('signupCtrl', ['$scope', 'userService', 'mediat
     function ($scope, userService, mediator, $rootScope) {
 
         $scope.signup = function () {
-            userService.signup($scope.email, $scope.password)
+            userService.signup($scope.username, $scope.password)
                 .then(function (data) {
 
                     $rootScope.isAuthenticated = userService.isAuthenticated;

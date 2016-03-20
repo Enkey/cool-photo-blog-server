@@ -17,9 +17,9 @@ app.config(['$routeProvider',
                 templateUrl: 'user/signup/signup.html',
                 controller: 'signupCtrl'
             })
-            .when('/userInfo', {
-                templateUrl: 'user/info/info.html',
-                controller: 'infoCtrl'
+            .when('/user/', {
+                templateUrl: 'user/account/user.html',
+                controller: 'userCtrl'
             })
             .when('/post', {
                 templateUrl: 'post/post.html',

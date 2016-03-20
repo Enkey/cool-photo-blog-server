@@ -26,13 +26,13 @@ angular.module('app').service('userService', ['$http', '$q', function ($http, $q
     };
 
 
-    this.signup = function (email, password) {
+    this.signup = function (username, password) {
 
         return $http({
             method: 'POST',
             url: 'auth/signup',
             data: {
-                email: email,
+                username: username,
                 password: password
             }
         }).then(function (response) {
@@ -52,13 +52,13 @@ angular.module('app').service('userService', ['$http', '$q', function ($http, $q
 
     };
 
-    this.signin = function (email, password) {
+    this.signin = function (username, password) {
 
         return $http({
             method: 'POST',
             url: 'auth/signin',
             data: {
-                email: email,
+                username: username,
                 password: password
             }
         }).then(function (response) {

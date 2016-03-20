@@ -2,7 +2,7 @@ angular.module('app').controller('signinCtrl', ['$scope', 'userService', '$rootS
     function ($scope, userService, $rootScope, mediator) {
 
         $scope.signin = function () {
-            userService.signin($scope.email, $scope.password)
+            userService.signin($scope.username, $scope.password)
                 .then(function (data) {
                     $rootScope.isAuthenticated = userService.isAuthenticated;
                     document.location.href = "/#/";
