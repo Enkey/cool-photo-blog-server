@@ -1,20 +1,20 @@
 var User = require('../../models/user');
 
 module.exports = function (req, res, next) {
-    var email = req.body.email;
+    var username = req.body.username;
     var password = req.body.password;
 
-    if (!email || !password) return res.json({error: true, message: "Missing params!"});
+    if (!username || !password) return res.json({error: true, message: "Missing params!"});
 
     if (req.isAuthenticated()) {
         return res.json({error: true, message: "Access denied!"})
     }
 
-    User.findOne({email: email}, function (err, user) {
+    User.findOne({username: username}, function (err, user) {
         //console.log(err);
         //console.log(user);
         if (!user) {
-            var userDB = new User({email: email, password: password});
+            var userDB = new User({username: username, password: password});
             userDB.save(function (err) {
                 //console.log("user DB err", err);
                 if (err) {

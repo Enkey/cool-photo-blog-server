@@ -8,8 +8,9 @@ const Schema = mongoose.Schema;
  */
 
 const UserSchema = new Schema({
-    email: {type: String, default: ''},
+    //email: {type: String, default: ''},
     username: {type: String, default: ''},
+    avatar_id: {type: String, default: ''},
     hashed_password: {type: String, default: ''},
     salt: {type: String, default: ''}
     //authToken: {type: String, default: ''},
@@ -53,7 +54,7 @@ UserSchema
 //    return email.length;
 //}, 'Email cannot be blank');
 //
-UserSchema.path('email').validate(function (email, fn) {
+UserSchema.path('username').validate(function (email, fn) {
     const User = mongoose.model('User');
 
     if (this.isNew) {
@@ -61,7 +62,7 @@ UserSchema.path('email').validate(function (email, fn) {
             fn(!err && users.length === 0);
         });
     } else fn(true);
-}, 'Email already exists');
+}, 'Username already exists');
 
 //UserSchema.path('email').validate(function (email) {
 //    return email.length;
@@ -79,8 +80,6 @@ UserSchema.path('hashed_password').validate(function (hashed_password) {
 UserSchema.pre('save', function (next) {
 
     if (!this.isNew) return next();
-
-    this.username = this.email.split('@')[0];
 
     if (!validatePresenceOf(this.password)) {
         next(new Error('Invalid password'));
@@ -141,7 +140,7 @@ UserSchema.methods = {
     getPublic: function () {
         return {
             username: this.username,
-            email: this.email
+            avatar_id: this.avatar_id
         }
     }
 };

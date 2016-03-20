@@ -8,9 +8,6 @@ module.exports = function (req, res, next) {
 
     passport.authenticate('local',
         function (err, user, info) {
-            //console.log('err:', err);
-            //console.log('info:', info);
-            //console.log('user:', user);
             if (err) {
                 return next(err);
             } else {
