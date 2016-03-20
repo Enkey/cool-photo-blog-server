@@ -110,9 +110,13 @@ p.top-user-block {
 }
 
 #set {
-    margin-left: 60px;
+    margin-left: 70px;
     margin-top: -15px;
 
+}
+
+#set1,#set{
+	cursor:pointer;
 }
 
 #choice li {
