@@ -1,5 +1,5 @@
 var multer  = require('multer');
-var upload = multer({ dest: 'files/' }).single('image');
+var upload = multer({ dest: 'public/files/' }).single('image');
 var File = require('../../models/file');
 
 module.exports = function (req, res, next) {
