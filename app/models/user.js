@@ -8,17 +8,13 @@ const Schema = mongoose.Schema;
  */
 
 const UserSchema = new Schema({
-    //email: {type: String, default: ''},
     username: {type: String, default: ''},
-    avatar_id: {type: String, default: ''},
+    avatar: {
+        type: Schema.Types.ObjectId,
+        ref: 'File'
+    },
     hashed_password: {type: String, default: ''},
     salt: {type: String, default: ''}
-    //authToken: {type: String, default: ''},
-    //facebook: {},
-    //twitter: {},
-    //github: {},
-    //google: {},
-    //linkedin: {}
 });
 
 const validatePresenceOf = function (value) {
@@ -136,12 +132,12 @@ UserSchema.methods = {
             return '';
         }
     },
-
-    getPublic: function () {
-        return {
-            username: this.username,
-            avatar_id: this.avatar_id
-        }
+    getPublic: function (cb) {
+        const User = mongoose.model('User');
+        User.findById(this._id).populate('avatar').exec(function (err, user) {
+            if (err) throw err;
+            cb(User.public(user))
+        });
     }
 };
 
@@ -164,7 +160,16 @@ UserSchema.statics = {
         return this.findOne(options.criteria)
             .select(options.select)
             .exec(cb);
+    },
+
+    public: function (user) {
+        return {
+            username: user.username,
+            avatar: (user.avatar) ? user.avatar.folder + '/' + user.avatar.filename : null
+        }
     }
+
+
 };
 
 module.exports = mongoose.model('User', UserSchema);

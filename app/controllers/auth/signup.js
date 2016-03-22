@@ -24,7 +24,9 @@ module.exports = function (req, res, next) {
                         if (err) {
                             return next(err);
                         } else {
-                            res.json({success: true, user: userDB.getPublic()});
+                            userDB.getPublic(function (data) {
+                                res.json({success: true, user: data})
+                            });
                         }
                     });
                 }

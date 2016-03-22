@@ -1,22 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../models/user');
+var user = require('../controllers/user');
 
-router.get('/', function (req, res) {
-    User.find({}, function (err, users) {
-        var parsedUsers = [];
-        users.forEach(function(user){
-            parsedUsers.push(user.getPublic());
-        });
-        res.json({data: parsedUsers});
-    });
-});
-router.get('/:username', function (req, res) {
-    console.log(req.params.username);
-    User.findOne({username: req.params.username}, function (err, user) {
-        if(err) throw err;
-        res.json({user: user.getPublic()});
-    });
+router.get('/', user.main);
+router.get('/get/:username', user.get);
 
-});
+router.post('/save', user.save);
+
 module.exports = router;

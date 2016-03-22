@@ -14,6 +14,8 @@ var pageRoutes = require('./app/routes/pages');
 var usersRoutes = require('./app/routes/users');
 var authRoutes = require('./app/routes/auth');
 var fileRoutes = require('./app/routes/file');
+var postsRoutes = require('./app/routes/posts');
+var categoriesRoutes = require('./app/routes/categories');
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -73,6 +75,8 @@ app.use('/', pageRoutes);
 app.use('/auth', authRoutes);
 app.use('/users', usersRoutes);
 app.use('/file', fileRoutes);
+app.use('/posts', postsRoutes);
+app.use('/categories', categoriesRoutes);
 
 /* CORS routes */
 app.all('*', function(req, res, next) {

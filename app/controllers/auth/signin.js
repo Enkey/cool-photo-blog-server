@@ -1,4 +1,5 @@
 var passport = require('passport');
+var User = require('../../models/user');
 
 module.exports = function (req, res, next) {
 
@@ -16,8 +17,9 @@ module.exports = function (req, res, next) {
                         if (err) {
                             return next(err);
                         } else {
-                            //console.log(typeof user);
-                            res.json({success: true, user: user.getPublic()});
+                            user.getPublic(function (data) {
+                                res.json({success: true, user: data})
+                            });
                         }
                     });
                 } else {

@@ -50,7 +50,7 @@ module.exports = function (req, res, next) {
 
             file.save(function (err) {
                 if (err) return next(err);
-                res.json({success: true, image: file});
+                res.json({success: true, image: File.getPublic(file)});
             });
         } else {
             res.json({error: true, message: 'Invalid file type!'})

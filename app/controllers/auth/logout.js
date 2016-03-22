@@ -5,14 +5,3 @@ module.exports = function (req, res) {
     req.logout();
     res.json({success: true});
 };
-/*
- function (req, res, next) {
- req.logout();
- req.session.save(function (err) {
- if (err) {
- return next(err);
- }
- res.json({success: true});
- });
- }
- */
