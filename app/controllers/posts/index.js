@@ -1,4 +1,5 @@
 module.exports = {
     main: require('./main'),
-    add: require('./add')
+    add: require('./add'),
+    category: require('./category')
 };
