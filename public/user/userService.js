@@ -1,5 +1,5 @@
 angular.module('app').run(['userService', '$rootScope', 'mediator', function (userService, $rootScope, mediator) {
-    console.log('run');
+    console.log('run-userService-file');
     userService.checkIsAuthenticated().then(function (response) {
         userService.isAuthenticated = response.data.isAuthenticated;
         $rootScope.isAuthenticated = userService.isAuthenticated;
