@@ -1,15 +1,22 @@
 angular.module('app')
-    .service('fileUploadService', ['$http', function($http) {
+    .service('fileUploadService', ['$http', '$q', function($http, $q) {
        this.uploadFileToUrl = function (file, uploadUrl) {
            var fd = new FormData();
 
            fd.append('image', file)
 
-           $http.post(uploadUrl, fd, {
+           return $http.post(uploadUrl, fd, {
                transformRequest: angular.identity,
                headers: {'Content-Type': undefined}
            }).then(function (response) {
-               console.log(response);
+
+               if (response.data.success === true) {
+                   return response.data;
+               }
+               else {
+                   return $q.reject(response.data);
+               }
+
            });
        }
     }]);

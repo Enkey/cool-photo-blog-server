@@ -94,4 +94,22 @@ angular.module('app').service('userService', ['$http', '$q', function ($http, $q
 
     };
 
+    this.setAvatar = function (avatar_id) {
+
+        return $http({
+            method: 'POST',
+            url: 'users/save',
+            data: {
+                avatar_id: avatar_id
+            }
+        }).then(function (response) {
+            if (response.data.success === true) {
+                return response.data;
+            }
+            else {
+                return $q.reject(response.data);
+            }
+        });
+    };
+
 }]);
