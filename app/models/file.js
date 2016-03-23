@@ -16,6 +16,7 @@ const FileSchema = new Schema({
 FileSchema.statics = {
     getPublic: function (file) {
         return {
+            id: file._id,
             path: file.folder + '/' + file.filename
         }
     }
