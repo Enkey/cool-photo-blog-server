@@ -4,6 +4,7 @@ angular.module('app').directive("repeatEnd", function(){
         link: function (scope, element, attrs) {
             if (scope.$last) {
                 scope.$eval(attrs.repeatEnd);
+
             }
         }
     };

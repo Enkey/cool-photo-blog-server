@@ -19,14 +19,14 @@ angular.module('app')
             }
 
             $scope.postsLoaded = function () {
-                //TODO - придумать другой способ(загрузились?)...
-                setTimeout(function() {
-                    var container = $('#gallery');
+                var container = $('#gallery');
+                container.imagesLoaded(function () {
                     container.masonry({         // НЕ находит масонри!
                         itemSelector: ".item-masonry",
                         percentPosition: true
                     });
-                }, 10);
+
+                });
             };
 
             postService.getPosts().then(function (data) {
