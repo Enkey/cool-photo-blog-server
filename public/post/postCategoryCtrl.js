@@ -18,6 +18,12 @@ angular.module('app')
                 })
             };
 
+            $scope.showModalDialog = function(post) {
+                $scope.post = post;
+                $('#myModal').modal('show');
+            };
+
+
             postService.getPostsByCategory($routeParams.category).then(function (data) {
                 if (data.data.length == 0) {
                     $scope.error = "No data";

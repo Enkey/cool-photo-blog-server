@@ -2,8 +2,35 @@
     <div id="gallery"> <!-- Masonry -->
         <div class="item-masonry size4" ng-repeat="post in posts" repeat-end="postsLoaded()">
             <!--{{post.title}}-->
-            <img ng-src="{{post.image.path}}">
+            <img ng-src="{{post.image.path}}" ng-click="showModalDialog(post)">
         </div>
     </div>
 </div>
 {{error}}
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!--Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{post.title}}</h4>
+            </div>
+            <div class="modal-body">
+                Author: {{post.author.username}}
+                <br>
+                <img src="{{post.image.path}}" alt="post_image">
+                <br>
+                category: {{post.category.title}}
+                <br>
+                description: {{post.description}}
+                <br>
+                created at: {{post.createdAt}}
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+

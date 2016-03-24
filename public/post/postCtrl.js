@@ -29,6 +29,12 @@ angular.module('app')
                 });
             };
 
+            $scope.showModalDialog = function(post) {
+                $scope.post = post;
+                $('#myModal').modal('show');
+            };
+
+
             postService.getPosts().then(function (data) {
                 $scope.posts = data.data;
             });
@@ -62,5 +68,6 @@ angular.module('app')
                         $scope.error = data.message;
                     });
             };
+
 
         }]);
