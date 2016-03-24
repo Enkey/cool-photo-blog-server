@@ -14,7 +14,6 @@
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.0.0/masonry.pkgd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.0/imagesloaded.pkgd.js"></script>
-    <script src="common/common.js"></script>
 
 </head>
 <body>
@@ -52,7 +51,7 @@
                 <div id="choice">
                     <div ng-controller="categoryCtrl">
                         <ul class="text-color">
-                            <li ng-repeat="c in categories">{{c.title}}</li>
+                            <li ng-repeat="c in categories"><a href="#/post/category/{{c.title}}">{{c.title}}</a></li>
                         </ul>
                     </div>
                     <hr>
@@ -78,18 +77,23 @@
 <!--<script src="http://localhost:3000/socket.io/socket.io.js"></script>-->
 <script src="bower_components/angular-socket-io/socket.min.js"></script>
 <script src="app.js"></script>
+
 <script src="common/fileModelDirective.js"></script>
 <script src="common/fileUploadService.js"></script>
+<script src="common/repeatEndDirective.js"></script>
+
 <script src="user/userService.js"></script>
 <script src="user/account/userCtrl.js"></script>
 <script src="user/signup/signupCtrl.js"></script>
 <script src="user/signin/signinCtrl.js"></script>
 <script src="user/logout/logoutCtrl.js"></script>
+
 <script src="post/postCtrl.js"></script>
+<script src="post/postCategoryCtrl.js"></script>
 <script src="post/postService.js"></script>
-<script src="category/categoryService.js"></script>
+
 <script src="category/categoryCtrl.js"></script>
-<script src="common/repeatEndDirective.js"></script>
+<script src="category/categoryService.js"></script>
 
 </body>
 </html>

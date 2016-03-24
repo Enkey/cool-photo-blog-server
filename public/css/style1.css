@@ -59,6 +59,13 @@ body {
     font-size: 20px;
     color: white;
 }
+.text-color a {
+    font-family: "Myraid Pro Regular", sans-serif;
+    font-size: 20px;
+    color: white;
+
+    text-decoration: none;
+}
 
 /*registration text tag*/
 #registration {

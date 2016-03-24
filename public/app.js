@@ -21,9 +21,13 @@ app.config(['$routeProvider',
                 templateUrl: 'user/account/user.html',
                 controller: 'userCtrl'
             })
-            .when('/post', {
-                templateUrl: 'post/post.html',
+            .when('/post/add', {
+                templateUrl: 'post/add.html',
                 controller: 'postCtrl'
+            })
+            .when('/post/category/:category', {
+                templateUrl: 'post/posts.html',
+                controller: 'postCategoryCtrl'
             })
             .otherwise({
                 redirectTo: '/'
