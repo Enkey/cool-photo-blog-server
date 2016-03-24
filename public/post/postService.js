@@ -18,6 +18,21 @@ angular.module('app').service('postService', ['$http', '$q' , function($http, $q
                 return $q.reject(response.data);
             }
         });
-
     };
+
+
+    this.getPosts = function () {
+        return $http({
+            method: 'GET',
+            url: 'posts/'
+        }).then(function (response) {
+            if (response.data.success === true) {
+                return response.data;
+            }
+            else {
+                return $q.reject(response.data);
+            }
+        });
+    };
+
 }]);

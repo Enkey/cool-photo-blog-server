@@ -50,20 +50,9 @@
                     <input id="search" type="text" placeholder="Search...">
                 </form>
                 <div id="choice">
-                    <!--<ul class="text-color">-->
-                    <!--<li>Animals</li>-->
-                    <!--<li>Space</li>-->
-                    <!--<li>Flowers</li>-->
-                    <!--<li>Nature</li>-->
-                    <!--<li>Girls</li>-->
-                    <!--<li>Cars</li>-->
-                    <!--<li>Buildings</li>-->
-                    <!--<li>Mountains</li>-->
-                    <!--<li>Design</li>-->
-                    <!--</ul>-->
                     <div ng-controller="categoryCtrl">
-                        <ul class="text-color"  ng-repeat="c in categories">
-                            <li>{{c.title}}</li>
+                        <ul class="text-color">
+                            <li ng-repeat="c in categories">{{c.title}}</li>
                         </ul>
                     </div>
                     <hr>
@@ -101,6 +90,7 @@
 <script src="post/postService.js"></script>
 <script src="category/categoryService.js"></script>
 <script src="category/categoryCtrl.js"></script>
+<script src="common/repeatEndDirective.js"></script>
 
 </body>
 </html>

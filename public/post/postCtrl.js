@@ -14,11 +14,29 @@ angular.module('app')
                 }
             });
 
+            if (userService.user) {
+                $scope.username = userService.user.username;
+            }
+
+            $scope.postsLoaded = function () {
+                //TODO - придумать другой способ(загрузились?)...
+                setTimeout(function() {
+                    var container = $('#gallery');
+                    container.masonry({         // НЕ находит масонри!
+                        itemSelector: ".item-masonry",
+                        percentPosition: true
+                    });
+                }, 10);
+            };
+
+            postService.getPosts().then(function (data) {
+                $scope.posts = data.data;
+            });
+
+
             $scope.addPost = function () {
 
-                if (!$scope.title || $scope.title.trim().length == 0 ||
-                    !$scope.description || $scope.description.trim().length == 0 ||
-                    !$scope.file || !$scope.category) {
+                if (!$scope.title || $scope.title.trim().length == 0 || !$scope.description || $scope.description.trim().length == 0 || !$scope.file || !$scope.category) {
                     $scope.error = "Fill all fields";
                     return;
                 }
@@ -29,10 +47,10 @@ angular.module('app')
                 fileUploadService.uploadFileToUrl(file, uploadUrl)
                     .then(function (data) {
                         postService.addPost(
-                                $scope.title,
-                                $scope.description,
-                                data.image.id,
-                                $scope.category.id)
+                            $scope.title,
+                            $scope.description,
+                            data.image.id,
+                            $scope.category.id)
                             .then(function () {
                                 document.location.href = "/#/";
                             })
@@ -43,8 +61,6 @@ angular.module('app')
                     .catch(function (data) {
                         $scope.error = data.message;
                     });
-
             };
-
 
         }]);

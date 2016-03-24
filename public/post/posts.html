@@ -1,0 +1,8 @@
+<div id="back-photo">
+    <div id="gallery"> <!-- Masonry -->
+        <div class="item-masonry size4" ng-repeat="post in posts" repeat-end="postsLoaded()">
+            <!--{{post.title}}-->
+            <img ng-src="{{post.image.path}}">
+        </div>
+    </div>
+</div>

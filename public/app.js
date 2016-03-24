@@ -6,8 +6,8 @@ app.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'main/main.html',
-                controller: 'mainCtrl'
+                templateUrl: 'post/posts.html',
+                controller: 'postCtrl'
             })
             .when('/signin', {
                 templateUrl: 'user/signin/signin.html',
