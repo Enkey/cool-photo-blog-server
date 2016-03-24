@@ -11,9 +11,26 @@
         </div>
 
         <div class="form-group">
+            <label for="category">Category</label>
+            <select  id="category" class="form-control"
+                ng-options="c.title for c in categories"
+                ng-model="category">
+            </select>
+        </div>
+
+        <div class="form-group">
             <label for="image">Image</label>
             <input type="file" id="image" file-model="file">
         </div>
 
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" rows="3" class="form-control" style="max-width: 100%;"
+                      ng-model="description"></textarea>
+        </div>
+
+
+
         <button class="btn btn-success" ng-click="addPost()">Add</button>
     </form>
+{{error}}
