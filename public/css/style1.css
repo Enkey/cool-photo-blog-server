@@ -183,3 +183,10 @@ hr {
     /*200 + 10*/
     padding: 80px 10px 10px 210px;
 }
+.error {
+    font-style: italic;
+    /*
+        may be red color? or something else
+        color: #f00;
+    */
+}
