@@ -20,8 +20,16 @@ angular.module('app')
 
             $scope.showModalDialog = function(post) {
                 $scope.post = post;
-                showModal();
+                showModalDialog();
             };
+
+            $scope.hideModalDialog = function($event, category) {
+                hideModalDialog(function () {
+                    document.location.href = "/#post/category/" + category;
+                });
+                $event.preventDefault();
+            };
+
 
 
             postService.getPostsByCategory($routeParams.category).then(function (data) {
