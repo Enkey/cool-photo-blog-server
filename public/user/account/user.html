@@ -1,15 +1,18 @@
 <div ng-show="isAuthenticated">
-    <div align="center">
-        <h2>Settings</h2>
+    <h2 class="text-center">Settings</h2>
+    <form>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" class="form-control" disabled ng-model="user.username">
+        </div>
+
+        <div class="form-group">
+            <label for="file">Avatar</label>
+            <input type="file" id="file" multiple file-model="file" class="form-control">
+        </div>
+        <button class="btn btn-success" ng-click="edit()">Save</button>
+    </form>
+    <div class="error">
+        {{error}}
     </div>
-    <div align="center">
-        <h2>User: {{user.username}}</h2>
-        <u><i>Avatar</i></u> </br></br>
-        <input type="file" multiple placeholder="Upload foto" file-model="file"> </br></br>
-    </div>
-    <div align="center">
-        </br></br>
-        <button class="button1" ng-click="edit()">Save</button>
-    </div>
-    {{error}}
 </div>
