@@ -34,7 +34,7 @@ body {
 
 /*background for photo*/
 #back-photo {
-    background: whitesmoke;
+    /*background: whitesmoke;*/
     margin-right: -10px;
     margin-left: -10px;
 }
