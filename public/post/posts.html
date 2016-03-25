@@ -23,10 +23,12 @@
                     <img src="{{post.image.path}}" alt="post_image">
                 </div>
                 <div class="panel">
-                    <strong>category: </strong>{{post.category.title}}
+                    <strong>Category: </strong>
+                    <a href="/#/{{post.category.title}}"
+                       ng-click="hideModalDialog($event, post.category.title)">{{post.category.title}}</a>
                 </div>
                 <div class="panel">
-                    <strong>description:</strong>
+                    <strong>Description:</strong>
                 </div>
                 <div class="panel">
                     <blockquote>
