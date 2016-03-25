@@ -7,24 +7,37 @@
     </div>
 </div>
 {{error}}
-<div id="myModal" class="modal fade" role="dialog">
+<div id="myModal" class="modal fade" role="dialog" tabindex="-1">
     <div class="modal-dialog">
         <!--Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">{{post.title}}</h4>
+                <h4 class="modal-title"><strong>{{post.title}}</strong></h4>
             </div>
-            <div class="modal-body">
-                Author: {{post.author.username}}
-                <br>
-                <img src="{{post.image.path}}" alt="post_image">
-                <br>
-                category: {{post.category.title}}
-                <br>
-                description: {{post.description}}
-                <br>
-                created at: {{post.createdAt}}
+            <div class="modal-body panel-group">
+                <div class="panel">
+                    <strong>Author: </strong>{{post.author.username}}
+                </div>
+                <div class="panel post-image">
+                    <img src="{{post.image.path}}" alt="post_image">
+                </div>
+                <div class="panel">
+                    <strong>category: </strong>{{post.category.title}}
+                </div>
+                <div class="panel">
+                    <strong>description:</strong>
+                </div>
+                <div class="panel">
+                    <blockquote>
+                        {{post.description}}
+                        <footer>{{post.author.username}}</footer>
+                    </blockquote>
+                </div>
+
+                <div class="panel">
+                    <strong>Created at: </strong>{{post.createdAt | date : 'EEEE, dd/MM/yyyy HH:mm'}}
+                </div>
 
             </div>
             <div class="modal-footer">
@@ -33,4 +46,5 @@
         </div>
     </div>
 </div>
+
 

@@ -2,6 +2,12 @@ angular.module('app').controller('signupCtrl', ['$scope', 'userService', 'mediat
     function ($scope, userService, mediator, $rootScope) {
 
         $scope.signup = function () {
+
+            if ($scope.password != $scope.password2) {
+                $scope.error = "Password mismatch. Enter again...";
+                return;
+            }
+
             userService.signup($scope.username, $scope.password)
                 .then(function (data) {
 

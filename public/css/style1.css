@@ -139,9 +139,10 @@ hr {
 #settings img {
     margin-left: auto;
     margin-right: auto;
-    height: 53px;
-    width: 53px;
-    padding-left: 8px;
+    height: 62px;
+    width: 62px;
+    padding-left: 5px;
+	cursor: pointer;
 }
 
 #registration:hover, #registration1:hover {
@@ -182,4 +183,19 @@ hr {
 
     /*200 + 10*/
     padding: 80px 10px 10px 210px;
+}
+.error {
+    font-style: italic;
+    margin: 10px 0 10px 0;
+    /*
+        may be red color? or something else
+        color: #f00;
+    */
+}
+.post-image {
+    text-align: center;
+}
+.post-image img {
+    max-width:100%;
+    max-height: 100%;
 }
