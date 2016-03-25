@@ -5,20 +5,11 @@ module.exports = function (req, res, next) {
     if(!q) {
         return next();
     }
-    console.log(q);
-    var rg = '/^'+q+'$/i';
-    console.log(rg);
-    Post.find({title: new RegExp('^'+q+'$', "i")}).exec(function (err, data) {
-        console.log(data);
-    });
+
     Post
-        .find({title: new RegExp('^'+q+'$', "i")})
-        //.find({
-        //    $and: [
-        //        { $or: [{title: new RegExp('^'+q+'$', "i")}] },
-        //        { $or: [{description: new RegExp('^'+q+'$', "i")}] }
-        //    ]
-        //})
+        .find({})
+        .or({title:  {$regex: q}})
+        .or({description:  {$regex: q}})
         .populate(Post.getPopulateQuery())
         .sort([['updatedAt', 'descending']])
         .exec(function (err, data) {
