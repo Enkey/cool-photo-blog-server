@@ -43,7 +43,7 @@ body {
 #search {
     margin-top: 15px;
     width: 194px;
-    height: 25px;
+    height: 31px;
     background: #cbdce6;
     margin-left: 3px;
     border: darkcyan;
@@ -115,17 +115,24 @@ p.top-user-block {
 
 }
 
+#choice ul {
+    margin-top: 15px;
+    padding: 0;
+}
 #choice li {
-    margin: 12px;
-    padding-right: 45px;
+    margin: 0;
+    padding: 0;
     list-style-type: none;
+}
+#choice li a {
+    display: block;
+    padding: 12px;
     text-align: center;
-
 }
 
 /*Mouse on text effect*/
-#choice li:hover {
-    color: lightslategrey;
+#choice li a:hover {
+    background: rgba(255, 255, 255, 0.1);
 
 }
 
@@ -165,6 +172,7 @@ hr {
 .item-masonry img {
     padding-left: 1px;
     width: 100%;
+    cursor: pointer;
     display: block;
 }
 
