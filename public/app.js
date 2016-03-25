@@ -29,6 +29,10 @@ app.config(['$routeProvider',
                 templateUrl: 'post/posts.html',
                 controller: 'postCategoryCtrl'
             })
+            .when('/search/:query', {
+                templateUrl: 'post/posts.html',
+                controller: 'searchCtrl'
+            })
             .otherwise({
                 redirectTo: '/'
             });

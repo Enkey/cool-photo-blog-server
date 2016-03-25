@@ -44,9 +44,10 @@
                     </div>
                 </div>
 
-                <form>
-                    <input id="search" type="text" placeholder="Search...">
-                </form>
+                <div ng-controller="searchCtrl">
+                    <input id="search" type="text" placeholder="Search..." ng-model="query" ng-change="search()"/>
+                </div>
+
                 <div id="choice">
                     <div ng-controller="categoryCtrl">
                         <ul class="text-color">
@@ -92,6 +93,7 @@
 <script src="post/postCtrl.js"></script>
 <script src="post/postCategoryCtrl.js"></script>
 <script src="post/postService.js"></script>
+<script src="post/searchCtrl.js"></script>
 
 <script src="category/categoryCtrl.js"></script>
 <script src="category/categoryService.js"></script>

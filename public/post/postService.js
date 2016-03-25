@@ -1,5 +1,22 @@
 angular.module('app').service('postService', ['$http', '$q', 'categoryService', function($http, $q, categoryService) {
 
+    this.search = function (query) {
+
+        return $http({
+            method: 'GET',
+            url: 'posts/search?q=' + query
+        }).then(function (response) {
+            console.log(response);
+            if (response.data.success === true) {
+                return response.data;
+            }
+            else {
+                return $q.reject(response.data);
+            }
+        });
+
+    };
+
     this.addPost = function (title, description, image_id, category_id) {
         return $http({
             method: 'POST',
