@@ -31,8 +31,7 @@ angular.module('app')
 
             $scope.showModalDialog = function(post) {
                 $scope.post = post;
-                $('#myModal').modal('show');
-                $("body.modal-open").removeAttr("style");
+                showModal();
             };
 
 
