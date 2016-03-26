@@ -36,7 +36,7 @@
                 </div>
                 <div class="user-block" ng-show="isAuthenticated" ng-controller="userCtrl">
                     <!--<img src="images/maxim.png" width="90" height="90" style="margin-left:55px;">-->
-                    <img ng-src="{{avatarUrl}}" width="90" height="90" style="margin-left:55px;">
+                    <a href="#/user"><img ng-src="{{avatarUrl}}" width="90" height="90" style="margin-left:55px;"></a>
                     <p id="guest" class="text-color"> Hello, {{user.username}}</p>
                     <div class="user-block-control-panel">
                         <a href="#/post/add"><img src="images/set2.png"></a>
