@@ -31,7 +31,7 @@
         <div id="main">
             <div id="left">
                 <div ng-hide="isAuthenticated">
-                    <img src="images/alien.png" width="90" height="90" style="margin-left:55px;">
+                    <img src="images/alien.png" width="90" style="margin-left:55px;">
                     <p id="guest" class="text-color"> Hello, Guest</p>
                 </div>
                 <div class="user-block" ng-show="isAuthenticated" ng-controller="userCtrl">
@@ -72,7 +72,7 @@
 
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-route/angular-route.min.js"></script>
-<!--<script src="http://localhost:3000/socket.io/socket.io.js"></script>-->
+<script src="http://localhost:3000/socket.io/socket.io.js"></script>
 <script src="bower_components/angular-socket-io/socket.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="app.js"></script>
@@ -99,6 +99,7 @@
 
 <script src="chat/chatCtrl.js"></script>
 <script src="chat/chatService.js"></script>
+<script src="chat/onEnterDirective.js"></script>
 
 </body>
 </html>
