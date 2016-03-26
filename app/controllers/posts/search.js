@@ -5,13 +5,14 @@ module.exports = function (req, res, next) {
     if(!q) {
         return next();
     }
+    //q = q.toLowerCase();
 
     Post
         .find({})
-        .or({title:  {$regex: q}})
-        .or({description:  {$regex: q}})
+        .or({title:  {$regex: new RegExp(q, "i") }})
+        .or({description:  {$regex: new RegExp(q, "i") }})
         .populate(Post.getPopulateQuery())
-        .sort([['updatedAt', 'descending']])
+        .sort([['createdAt', 'descending']])
         .exec(function (err, data) {
         if (err) throw err;
         if (!data) {
