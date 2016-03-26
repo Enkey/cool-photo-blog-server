@@ -1,6 +1,14 @@
 angular.module('app')
-    .controller('postCtrl', ['$scope', 'fileUploadService', 'mediator', 'userService', 'categoryService', 'postService',
-        function ($scope, fileUploadService, mediator, userService, categoryService, postService) {
+    .controller('postCtrl', ['$scope', 'fileUploadService', 'mediator', 'userService', 'categoryService',
+        'postService', 'locationService',
+        function ($scope, fileUploadService, mediator, userService, categoryService, postService, locationService) {
+
+            if (document.location.hash == '#/post/add') {
+                if (!userService.isAuthenticated) {
+                    locationService.changeLocation('#/post/add', '#/signin');
+                }
+
+            }
 
             $scope.categories = categoryService.categories;
             mediator.$on('categories:loaded', function () {
@@ -11,6 +19,7 @@ angular.module('app')
             mediator.$on('data:changed', function () {
                 if (userService.user) {
                     $scope.username = userService.user.username;
+                    locationService.restoreLocation();
                 }
             });
 

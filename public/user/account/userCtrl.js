@@ -1,8 +1,10 @@
-angular.module('app').controller('userCtrl', ['$scope', 'userService', '$rootScope', 'mediator', 'fileUploadService',
-    function ($scope, userService, $rootScope, mediator, fileUploadService) {
+angular.module('app').controller('userCtrl', ['$scope', 'userService', '$rootScope', 'mediator',
+    'fileUploadService', 'locationService',
+    function ($scope, userService, $rootScope, mediator, fileUploadService, locationService) {
 
         mediator.$on('data:changed', function () {
             init();
+            locationService.restoreLocation();
         });
 
         function init() {
@@ -14,6 +16,9 @@ angular.module('app').controller('userCtrl', ['$scope', 'userService', '$rootSco
                 if ($scope.avatarUrl == null) {
                     $scope.avatarUrl = "images/alien.png";
                 }
+            }
+            else {
+                locationService.changeLocation('#/user' ,'#/signin');
             }
         }
 
