@@ -36,6 +36,7 @@ angular.module('app').controller('userCtrl', ['$scope', 'userService', '$rootSco
                         .then(function (data) {
                             userService.user = data.user;
                             mediator.$emit('data:changed');
+                            $scope.error = "";
                         })
                         .catch(function (data) {
                             $scope.error = data.message;
