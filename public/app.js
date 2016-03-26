@@ -33,6 +33,10 @@ app.config(['$routeProvider',
                 templateUrl: 'post/posts.html',
                 controller: 'searchCtrl'
             })
+            .when('/chat', {
+                templateUrl: 'chat/chat.html',
+                controller: 'chatCtrl'
+            })
             .otherwise({
                 redirectTo: '/'
             });
