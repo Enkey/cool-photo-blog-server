@@ -1,16 +1,6 @@
 angular.module('app')
-    .controller('chatCtrl', ['$scope', 'chatService', 'locationService', 'userService', 'mediator', 'socket',
-    function ($scope, chatService, locationService, userService, mediator, socket) {
-
-        if (!userService.isAuthenticated) {
-            locationService.changeLocation('#/chat', '#/signin');
-        }
-
-        mediator.$on('data:changed', function () {
-            if (userService.user) {
-                locationService.restoreLocation();
-            }
-        });
+    .controller('chatCtrl', ['$scope', 'chatService', 'userService', 'socket',
+    function ($scope, chatService, userService, socket) {
 
         $scope.getMessageClass = function (message) {
             var className =  'chat-message';

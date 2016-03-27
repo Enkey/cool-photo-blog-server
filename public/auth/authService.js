@@ -15,16 +15,16 @@
 
 
         function register(credentials) {
-            console.log('register', credentials);
+
             return $http
                 .post('auth/signup', {
                     username: credentials.username,
                     password: credentials.password
                 })
                 .then(function (res) {
-                    console.log('register-response', res);
+
                     if (res.data.success === true) {
-                        console.log('register-response-success', res.data);
+
                         setCurrentUser(res.data);
                         return res.data;
                     }
@@ -42,7 +42,7 @@
                 .then(function (res) {
                     console.log(res.data);
                     if (res.data.success === true) {
-
+                        setCurrentUser(res.data);
                         return res.data;
                     }
                     return $q.reject(res.data);
@@ -79,7 +79,7 @@
 
         //private
         function setCurrentUser (data) {
-            console.log('setCurrentUser', data, $rootScope.globals);
+
             if (!$rootScope.globals) {
                 $rootScope.globals = {};
             }
@@ -92,7 +92,7 @@
                 $rootScope.globals.user.avatar = "images/alien.png";
             }
             $rootScope.$broadcast('globals:changed');
-            console.log('setCurrentUser-end', data, $rootScope.globals);
+
         }
 
         //private

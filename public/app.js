@@ -37,10 +37,10 @@
                 templateUrl: 'post/posts.html',
                 controller: 'searchCtrl'
             })
-            //.when('/chat', {
-            //    templateUrl: 'chat/chat.html',
-            //    controller: 'chatCtrl'
-            //})
+            .when('/chat', {
+                templateUrl: 'chat/chat.html',
+                controller: 'chatCtrl'
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -54,7 +54,8 @@
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             var restricted = [
                 '/user/',
-                '/post/add'
+                '/post/add',
+                '/chat'
             ];
 
 

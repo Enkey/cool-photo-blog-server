@@ -26,7 +26,6 @@
                     }
 
                     $rootScope.globals.categories = res.data.data;
-                    console.log('categories-loaded', $rootScope.globals.categories);
                     return res;
                 });
         }
