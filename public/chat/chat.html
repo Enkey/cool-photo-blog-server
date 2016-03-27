@@ -1,5 +1,37 @@
-<div ng-show="isAuthenticated">
-    {{msg}}
-    <button ng-click="getMessage()">GET Message</button>
+<!--<div ng-show="isAuthenticated">-->
+    <!--{{msg}}-->
+    <!--<button ng-click="getMessage()">GET Message</button>-->
 
+<!--</div>-->
+
+<div class="chat">
+    <div class="messages-list">
+        <div ng-repeat="message in messages" class="chat-message chat-message-in">
+            <div class="chat-message-main">
+                <div class="chat-message-text">
+                    {{message.text}}
+                </div>
+            </div>
+            <div class="chat-message-date"><span>21.01.2016</span><span>10:00:00</span></div>
+            <div class="chat-message-avatar">
+                <div class="item_user-avatar">
+                    <img ng-src="{{message.user.avatar}}">
+                </div>
+                <div class="item_user-username">{{message.user.username}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="chat-bottom-controls row">
+    <form class="col-xs-12">
+        <div class="chat-control-textarea">
+            <textarea class="form-control" name="message_text" on-enter="sendMessage()" ng-model="message"></textarea>
+        </div>
+        <div class="chat-control-button send">
+            <a ng-click="sendMessage()">
+                <img src="/images/fa-send.png" alt="">
+            </a>
+        </div>
+
+    </form>
 </div>
