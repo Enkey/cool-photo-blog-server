@@ -1,7 +1,6 @@
 angular.module('app')
     .controller('chatCtrl', ['$scope', 'chatService', 'locationService', 'userService', 'mediator', 'socket',
     function ($scope, chatService, locationService, userService, mediator, socket) {
-        $scope.msg = 'OK - Chat';
 
         if (!userService.isAuthenticated) {
             locationService.changeLocation('#/chat', '#/signin');
@@ -12,6 +11,24 @@ angular.module('app')
                 locationService.restoreLocation();
             }
         });
+
+        $scope.getMessageClass = function (message) {
+            var className =  'chat-message';
+
+
+            if(message.user && message.user.username == $scope.currentUser.username) {
+                className += ' chat-message-out'
+            } else if(message.system === true) {
+                className += ' chat-message-system'
+            } else {
+                className += ' chat-message-in';
+            }
+
+            console.log('getClassName',message, className);
+            return className;
+        };
+
+        socket.emit('init');
 
         socket.on('init', function (data) {
             $scope.currentUser = data.currentUser;
@@ -24,8 +41,9 @@ angular.module('app')
         });
 
         socket.on('user:join', function (data) {
+            console.log('user:join', data);
             $scope.messages.push({
-                user: 'chatroom',
+                system: true,
                 text: 'User ' + data.username + ' has joined.'
             });
             $scope.users.push(data);
@@ -33,8 +51,9 @@ angular.module('app')
 
         // add a message to the conversation when a user disconnects or leaves the room
         socket.on('user:left', function (data) {
+            console.log('user:left', data);
             $scope.messages.push({
-                user: 'chatroom',
+                system: true,
                 text: 'User ' + data.username + ' has left.'
             });
             var i, user;

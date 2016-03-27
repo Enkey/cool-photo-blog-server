@@ -3,10 +3,15 @@
     <!--<button ng-click="getMessage()">GET Message</button>-->
 
 <!--</div>-->
-
+<ul>
+    <li ng-repeat="user in users">
+        <img ng-src="{{user.avatar}}" width="45">
+        {{user.username}}
+    </li>
+</ul>
 <div class="chat">
     <div class="messages-list">
-        <div ng-repeat="message in messages" class="chat-message chat-message-in">
+        <div ng-repeat="message in messages" ng-class="getMessageClass(message)">
             <div class="chat-message-main">
                 <div class="chat-message-text">
                     {{message.text}}

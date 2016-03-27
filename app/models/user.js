@@ -164,6 +164,7 @@ UserSchema.statics = {
 
     public: function (user) {
         return {
+            id: user._id,
             username: user.username,
             avatar: (user.avatar) ? user.avatar.folder + '/' + user.avatar.filename : null
         }
