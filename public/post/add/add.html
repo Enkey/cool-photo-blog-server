@@ -1,4 +1,4 @@
-<div ng-show="isAuthenticated">
+<div ng-show="globals.isAuthenticated">
     <h2>Add new post</h2>
     <form>
         <div class="form-group">
@@ -8,13 +8,13 @@
 
         <div class="form-group">
             <label for="user">Author</label>
-            <input type="text" id="user" class="form-control" ng-model="username" readonly>
+            <input type="text" id="user" class="form-control" ng-model="globals.user.username" readonly>
         </div>
 
         <div class="form-group">
             <label for="category">Category</label>
             <select  id="category" class="form-control"
-                     ng-options="c.title for c in categories"
+                     ng-options="c.title for c in globals.categories"
                      ng-model="category">
             </select>
         </div>
