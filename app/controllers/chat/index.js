@@ -21,6 +21,7 @@ var users = (function () {
     var users = [];
 
     var claim = function (user) {
+        if(!user) return;
         var exist = false;
         users.forEach(function (u) {
             if (u.username === user.username) {
