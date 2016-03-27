@@ -1,15 +1,13 @@
 (function () {
     'use strict';
-
-    angular
-        .module('app')
-        .controller('postCtrl', postCtrl);
+    angular.module('app')
+        .controller('postCategoryCtrl', postCategoryCtrl);
 
 
-    postCtrl.$inject = ['$scope', 'postService'];
+    postCategoryCtrl.$inject = ['$scope', 'postService', '$routeParams'];
 
 
-    function postCtrl($scope, postService) {
+    function postCategoryCtrl($scope, postService, $routeParams) {
 
 
         $scope.postsLoaded = function () {
@@ -20,7 +18,7 @@
                     percentPosition: true
                 });
 
-            });
+            })
         };
 
         $scope.showModalDialog = function (post) {
@@ -37,14 +35,16 @@
 
 
         postService
-            .getPosts()
+            .getPostsByCategory($routeParams.category)
             .then(function (data) {
-                $scope.posts = data.data;
-                if ($scope.posts.length == 0) {
-                    $scope.error = 'No data';
+                if (data.data.length == 0) {
+                    $scope.error = "No data";
                 }
-                console.log('posts', $scope.posts);
-            });
+                $scope.posts = data.data;
+            }).catch(function (err) {
+            $scope.error = err;
+        });
     }
+
 
 })();

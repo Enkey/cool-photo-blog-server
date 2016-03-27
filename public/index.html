@@ -21,23 +21,23 @@
     <div id="header">
         <div id="top" class="text-color">
             <div id="blog"><a href="#/">PhotoBlog.org</a></div>
-            <div class="top-user-block" ng-hide="isAuthenticated">
-                <a href="#/signin">Login</a> | <a href="#/signup">Registration</a>
+            <div class="top-user-block" ng-hide="globals.isAuthenticated">
+                <a href="#/login">Login</a> | <a href="#/registration">Registration</a>
             </div>
-            <div class="top-user-block" ng-show="isAuthenticated" ng-controller="logoutCtrl">
+            <div class="top-user-block" ng-show="globals.isAuthenticated" ng-controller="logoutCtrl">
                 <a href="#/" ng-click="logout()">logout</a>
             </div>
         </div><!--Top block-->
         <div id="main">
             <div id="left">
-                <div ng-hide="isAuthenticated">
+                <div ng-hide="globals.isAuthenticated">
                     <img src="images/alien.png" width="90" height="90" style="margin-left:55px;">
                     <p id="guest" class="text-color"> Hello, Guest</p>
                 </div>
-                <div class="user-block" ng-show="isAuthenticated" ng-controller="userCtrl">
+                <div class="user-block" ng-show="globals.isAuthenticated">
                     <!--<img src="images/maxim.png" width="90" height="90" style="margin-left:55px;">-->
-                    <a href="#/user"><img ng-src="{{avatarUrl}}" width="90" height="90" style="margin-left:55px;"></a>
-                    <p id="guest" class="text-color"> Hello, {{user.username}}</p>
+                    <a href="#/user"><img ng-src="{{globals.user.avatar}}" width="90" height="90" style="margin-left:55px;"></a>
+                    <p id="guest" class="text-color"> Hello, {{globals.user.username}}</p>
                     <div class="user-block-control-panel">
                         <a href="#/post/add"><img src="images/set2.png"></a>
                         <a href="#/user"><img src="images/set3.png"></a>
@@ -49,9 +49,9 @@
                 </div>
 
                 <div id="choice">
-                    <div ng-controller="categoryCtrl">
+                    <div>
                         <ul class="text-color">
-                            <li ng-repeat="c in categories"><a href="#/post/category/{{c.title}}">{{c.title}}</a></li>
+                            <li ng-repeat="c in globals.categories"><a href="#/post/category/{{c.title}}">{{c.title}}</a></li>
                         </ul>
                     </div>
                     <hr>
@@ -77,24 +77,28 @@
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="app.js"></script>
 
+<script src="auth/authService.js"></script>
+
 <script src="common/fileModelDirective.js"></script>
 <script src="common/fileUploadService.js"></script>
 <script src="common/repeatEndDirective.js"></script>
-<script src="common/locationService.js"></script>
+
 
 <script src="user/userService.js"></script>
 <script src="user/account/userCtrl.js"></script>
-<script src="user/signup/signupCtrl.js"></script>
-<script src="user/signin/signinCtrl.js"></script>
+<script src="user/login/loginCtrl.js"></script>
+<script src="user/registration/registrationCtrl.js"></script>
 <script src="user/logout/logoutCtrl.js"></script>
+
 
 <script src="post/common.js"></script>
 <script src="post/postCtrl.js"></script>
-<script src="post/postCategoryCtrl.js"></script>
+<script src="post/add/postAddCtrl.js"></script>
+<script src="post/category/postCategoryCtrl.js"></script>
 <script src="post/postService.js"></script>
-<script src="post/searchCtrl.js"></script>
+<script src="post/search/searchCtrl.js"></script>
 
-<script src="category/categoryCtrl.js"></script>
+
 <script src="category/categoryService.js"></script>
 
 <script src="chat/chatCtrl.js"></script>

@@ -1,0 +1,26 @@
+<div ng-if="!globals.isAuthenticated">
+
+        <h2 class="text-center">Login</h2>
+
+        <form role="form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" class="form-control" placeholder="Your username"
+                       ng-model="credentials.username"/>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" placeholder="Your Password"
+                       ng-model="credentials.password"/>
+
+            </div>
+
+            <button class="btn btn-success" ng-click="login()">Login</button>
+            <input type="reset" value="Reset" class="btn btn-default"/>
+        </form>
+        <p class="error">
+            {{error}}
+        </p>
+
+</div>

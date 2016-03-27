@@ -1,22 +1,29 @@
-angular.module('app')
-    .service('fileUploadService', ['$http', '$q', function($http, $q) {
-       this.uploadFileToUrl = function (file, uploadUrl) {
-           var fd = new FormData();
+(function () {
+    'use strict';
 
-           fd.append('image', file)
+    angular
+        .module('app')
+        .service('fileUploadService', ['$http', '$q', function ($http, $q) {
+            this.uploadFileToUrl = function (file, uploadUrl) {
+                var fd = new FormData();
 
-           return $http.post(uploadUrl, fd, {
-               transformRequest: angular.identity,
-               headers: {'Content-Type': undefined}
-           }).then(function (response) {
+                fd.append('image', file);
 
-               if (response.data.success === true) {
-                   return response.data;
-               }
-               else {
-                   return $q.reject(response.data);
-               }
+                return $http.post(uploadUrl, fd, {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                }).then(function (response) {
 
-           });
-       }
-    }]);
+                    if (response.data.success === true) {
+                        return response.data;
+                    }
+                    else {
+                        return $q.reject(response.data);
+                    }
+
+                });
+            }
+        }]);
+
+
+})();

@@ -1,80 +1,90 @@
-angular.module('app').service('postService', ['$http', '$q', 'categoryService', function($http, $q, categoryService) {
+(function () {
+    'use strict';
 
-    this.search = function (query) {
+    angular
+        .module('app')
+        .service('postService', postService);
 
-        return $http({
-            method: 'GET',
-            url: 'posts/search?q=' + query
-        }).then(function (response) {
-            console.log(response);
-            if (response.data.success === true) {
-                return response.data;
-            }
-            else {
-                return $q.reject(response.data);
-            }
-        });
+    postService.$inject = ['$http', '$q', '$rootScope'];
+    function postService($http, $q, $rootScope) {
 
-    };
+        this.search = search;
+        this.addPost = addPost;
+        this.getPostsByCategory = getPostsByCategory;
+        this.getPosts = getPosts;
 
-    this.addPost = function (title, description, image_id, category_id) {
-        return $http({
-            method: 'POST',
-            url: 'posts/add',
-            data: {
-                title: title,
-                description: description,
-                image_id: image_id,
-                category_id: category_id
-            }
-        }).then(function (response) {
-            if (response.data.success === true) {
-                return response.data;
-            }
-            else {
-                return $q.reject(response.data);
-            }
-        });
-    };
+        function search(query) {
 
-    this.getPostsByCategory = function (category) {
-
-        var category_id = null;
-        categoryService.categories.forEach(function (item) {
-            if (item.title.toLowerCase() == category.toLowerCase()) {
-                category_id = item.id;
-            }
-        });
-
-        if (category_id == null) {
-            return $q.reject("No category: " + category);
+            return $http
+                .get('posts/search?q=' + query)
+                .then(function (res) {
+                    if (res.data.success === true) {
+                        return res.data;
+                    }
+                    else {
+                        return $q.reject(res.data);
+                    }
+                });
         }
 
-        return $http({
-            method: 'GET',
-            url: 'posts/category/' + category_id
-        }).then(function (response) {
-            if (response.data.success === true) {
-                return response.data;
-            }
-            else {
-                return $q.reject(response.data);
-            }
-        });
-    };
+        function addPost(title, description, image_id, category_id) {
+            return $http
+                .post('posts/add', {
+                    title: title,
+                    description: description,
+                    image_id: image_id,
+                    category_id: category_id
+                })
+                .then(function (res) {
+                    if (res.data.success === true) {
+                        return res.data;
+                    }
+                    else {
+                        return $q.reject(res.data);
+                    }
+                });
+        }
 
-    this.getPosts = function () {
-        return $http({
-            method: 'GET',
-            url: 'posts/'
-        }).then(function (response) {
-            if (response.data.success === true) {
-                return response.data;
-            }
-            else {
-                return $q.reject(response.data);
-            }
-        });
-    };
+        function getPostsByCategory(category) {
 
-}]);
+            var category_id = null;
+            $rootScope.globals.categories.forEach(function (item) {
+                if (item.title.toLowerCase() == category.toLowerCase()) {
+                    category_id = item.id;
+                }
+            });
+
+            if (category_id == null) {
+                return $q.reject("No category: " + category);
+            }
+
+            return $http
+                .get('posts/category/' + category_id)
+                .then(function (res) {
+                    if (res.data.success === true) {
+                        return res.data;
+                    }
+                    else {
+                        return $q.reject(res.data);
+                    }
+                });
+        }
+
+        function getPosts() {
+            return $http
+                .get('posts/')
+                .then(function (res) {
+                    if (res.data.success === true) {
+                        return res.data;
+                    }
+                    else {
+                        return $q.reject(res.data);
+                    }
+                });
+        }
+
+    }
+
+})();
+
+
