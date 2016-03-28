@@ -1,10 +1,21 @@
-angular.module('app').service('chatService', function() {
+angular.module('app').service('chatService',['$http', '$q', function($http, $q) {
 
-    this.getMessage = function() {
-        return 'msg1';
-    };
+    this.getMessages = getMessages;
 
-});
+    function getMessages() {
+        return $http
+            .get('messages/')
+            .then(function (res) {
+                if (res.data.success === true) {
+                    return res.data;
+                }
+                else {
+                    return $q.reject(res.data);
+                }
+            });
+    }
+
+}]);
 angular.module('app').factory('socket', function ($rootScope) {
     var socket = io.connect();
     return {

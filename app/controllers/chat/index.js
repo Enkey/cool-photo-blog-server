@@ -3,6 +3,7 @@ var Message = require('../../models/message');
 module.exports = function (socket) {
 
     var session = socket.handshake.session;
+    console.log(session);
 
     if (!session.passport) return;
 
@@ -21,17 +22,26 @@ var users = (function () {
     var users = [];
 
     var claim = function (user) {
+        console.log('claim',user);
         if(!user) return;
         var exist = false;
-        users.forEach(function (u) {
-            if (u.username === user.username) {
+        console.log(users);
+        for(var i = 0; i < users.length; i++) {
+            console.log('i',i);
+
+            if(!users[i]) continue;
+
+            if (users[i].username == user.username) {
                 exist = true;
-                return false;
+                break;
             }
-        });
+
+        }
         if(!exist) {
             users.push(user);
         }
+
+        console.log('claim users', users);
     };
 
     var get = function () {
@@ -40,14 +50,15 @@ var users = (function () {
 
     var free = function (user) {
         var index = -1;
-        users.forEach(function (u, i) {
-            if (u.username === user.username) {
+        console.log('free', user);
+        for(var i = 0; i < users.length; i++) {
+            if (users[i].username === user.username) {
                 index = i;
-                return false;
+                break;
             }
-        });
+        }
         if(index >= 0) {
-            delete users[index];
+            users = users.slice(index, 1);
         }
     };
 
@@ -58,19 +69,21 @@ var users = (function () {
     };
 }());
 function connect(socket, user) {
-    console.log(user);
 
     users.claim(user);
+    var init = function() {
+        return {
+            currentUser: user,
+            users: users.get()
+        }
+    };
+    socket.emit('init', init());
 
-    console.log(users.get());
 
-    //var name = user.username;
-    // send the new user their name and a list of users
-    socket.emit('init', {
-        currentUser: user,
-        users: users.get()
+    socket.on('init', function () {
+        console.log('on init!');
+        socket.emit('init', init());
     });
-
     // notify other clients that a new user has joined
     socket.broadcast.emit('user:join', user);
 
@@ -81,10 +94,10 @@ function connect(socket, user) {
             user: user.id
         });
         message.save(function () {
-            socket.broadcast.emit('send:message', {
-                user: user,
-                text: data.message
+            message.getPublic(function (message) {
+                socket.broadcast.emit('send:message', message);
             });
+
         });
 
     });

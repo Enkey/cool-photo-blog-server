@@ -251,6 +251,9 @@ hr {
     left: -9px;
     border-right: 9px solid #060E1F;
 }
+.chat-message-system .chat-message-text:after {
+    display: none;
+}
 
 .chat-message-text:after {
     content: '';
@@ -333,7 +336,7 @@ hr {
     margin-left: -10px;
 }
 .chat-control-textarea {
-    padding-left: 65px;
+    padding-left: 25px;
     padding-right: 72px;
 }
 .chat-control-textarea textarea {
