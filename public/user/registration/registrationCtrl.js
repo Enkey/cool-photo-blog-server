@@ -5,8 +5,8 @@
         .module('app')
         .controller('registrationCtrl', registrationCtrl);
 
-    registrationCtrl.$inject = ['$scope', 'authService', '$location'];
-    function registrationCtrl($scope, authService, $location) {
+    registrationCtrl.$inject = ['$scope', 'authService', '$location', '$timeout'];
+    function registrationCtrl($scope, authService, $location, $timeout) {
 
         $scope.credentials = {
             username: '',
@@ -16,11 +16,12 @@
 
 
         $scope.register = register;
+        $scope.reset = reset;
 
         function register() {
 
-            if ($scope.credentials.password != $scope.credentials.password2) {
-                $scope.error = "Password mismatch. Enter again...";
+            if ($scope.$$childTail.registrationForm.$invalid) {
+                $scope.$broadcast('validation-checker-check');
                 return;
             }
 
@@ -36,6 +37,18 @@
 
         }
 
+        function reset() {
+            $scope.credentials = {
+                username: '',
+                password: '',
+                password2: ''
+            };
+            $scope.error = null;
+            $timeout(function() {
+                $scope.$broadcast('validation-checker-reset');
+            }, 0, false);
+            $scope.$$childTail.registrationForm.$setPristine();
+        }
 
     }
 

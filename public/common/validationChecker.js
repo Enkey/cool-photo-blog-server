@@ -36,8 +36,10 @@
                 });
 
                 function toggleClass() {
-                    el.toggleClass('has-error', formCtrl[inputName].$invalid);
-                    el.toggleClass('has-success', formCtrl[inputName].$valid);
+                    $timeout(function () {
+                        el.toggleClass('has-error', formCtrl[inputName].$invalid && formCtrl[inputName].$touched);
+                        el.toggleClass('has-success', formCtrl[inputName].$valid && formCtrl[inputName].$touched);
+                    }, 0, false);
                 }
 
                 function removeClass() {
