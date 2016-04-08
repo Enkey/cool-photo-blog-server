@@ -17,11 +17,12 @@ angular.module('app')
             restrict: 'A',
             link: function (scope, element, attr) {
                 if (scope.$last === true) {
-                    setTimeout(function () {
-                        var $messagesBox = $(element).closest('.messages-list');
-                        var $lastMessage = $messagesBox.find('.chat-message:last');
-                        $messagesBox.scrollTop($(element).offset().top);
-                    }, 0);
+                    //alert('last');
+                    //setTimeout(function () {
+                    //    var $messagesBox = $(element).closest('.messages-list');
+                    //    //var $lastMessage = $messagesBox.find('.chat-message:last');
+                    //    $messagesBox.scrollTop($($messagesBox).height());
+                    //}, 1000);
 
                 }
             }

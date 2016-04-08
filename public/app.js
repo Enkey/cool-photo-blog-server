@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ngRoute', 'btford.socket-io'])
+        .module('app', ['ngRoute', 'btford.socket-io', 'luegg.directives'])
         .config(config)
         .run(run);
 

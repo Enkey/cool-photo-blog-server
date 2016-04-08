@@ -31,8 +31,8 @@
     </div>
 
     <div class="chat" id="chat-box">
-        <div class="messages-list">
-            <div ng-repeat="message in messages track by $index" ng-class="getMessageClass(message)" scroll-bottom>
+        <div class="messages-list" scroll-glue>
+            <div ng-repeat="message in messages track by $index" ng-class="getMessageClass(message)">
                 <div class="chat-message-main">
                     <div class="chat-message-text">
                         {{message.text}}
